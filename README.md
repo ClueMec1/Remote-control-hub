@@ -64,6 +64,8 @@ dialog is open, so a USB or Bluetooth scanner in keyboard mode works without cli
   charged beneath it.
 - Percentage and dollar coupons apply when the cashier scans or types the code. A dollar coupon comes off
   each matching unit, or once off the whole order when it applies to everything.
+- An item the owner gave no fixed price asks the cashier to type one each time it is scanned. Each price
+  typed gets its own line. A barcode scanned into the price box by mistake is rejected.
 - Clearance markdowns are always on, and coupons skip clearance items.
 - Tax is charged on items the owner marked as taxed, after discounts.
 
@@ -113,5 +115,5 @@ amounts on the device.
 - Link a register to its host before it starts trading. Sales made on a never-linked register reach the
   host as history when it joins, but their stock changes do not.
 - Clearing the browser's site data erases this register's data, including sales not yet sent to the host.
-- After replacing these files with a newer version, change `v1` in `sw.js` to `v2` so browsers pick up the
+- After replacing these files with a newer version, raise the version number in `sw.js` (for example `v2` to `v3`) so browsers pick up the
   update.

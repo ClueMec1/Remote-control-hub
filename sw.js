@@ -1,5 +1,5 @@
 /* Offline shell for the Checkout Terminal. Bump the version in CACHE when you replace any file listed in SHELL. */
-const PREFIX = 'grocer-register-', CACHE = PREFIX + 'v1';
+const PREFIX = 'grocer-register-', CACHE = PREFIX + 'v2';
 const SHELL = ['./checkout_terminal.html', './terminal.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', event => {
