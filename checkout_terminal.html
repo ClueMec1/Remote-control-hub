@@ -35,7 +35,7 @@ button:disabled { cursor: not-allowed; }
 
 .bar { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 14px 24px 10px; }
 .bar h1 { min-width: 0; margin: 0; font-size: 1.5rem; font-weight: 700; letter-spacing: .01em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.bar-meta { display: flex; gap: 18px; align-items: baseline; color: var(--mute); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.bar-meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px 16px; align-items: baseline; color: var(--mute); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .lamp::before { content: ''; display: inline-block; width: .55em; height: .55em; border-radius: 50%; background: var(--leaf); margin-right: .45em; }
 
 .lamp.away::before { background: var(--tag); }
@@ -70,23 +70,12 @@ button:disabled { cursor: not-allowed; }
 .coupons li { display: flex; align-items: center; gap: 4px; background: var(--tag); color: var(--tag-ink); font-weight: 700; padding: 3px 4px 3px 10px; border-radius: 3px; }
 .coupons button { border: 0; background: transparent; color: inherit; font-size: 1.15rem; line-height: 1; padding: 2px 6px; }
 
-.checkout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 320px); gap: 14px 28px; padding: 14px 24px 18px; background: var(--panel); border-top: 1px solid var(--line); }
-.acct label { display: block; color: var(--mute); font-size: .9rem; margin-bottom: 4px; }
-.acct input { width: 100%; max-width: 300px; height: 44px; padding: 0 12px; background: var(--well); border: 1px solid var(--line); border-radius: 6px; font-size: 1.15rem; letter-spacing: .04em; }
-.acct-card { margin-top: 10px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
-.acct-card strong { font-size: 1.15rem; }
-.acct-card .owes { color: var(--mute); flex-basis: 100%; }
-.pill { font-size: .85rem; font-weight: 700; padding: 1px 8px; border-radius: 3px; background: var(--tomato); color: #2a0703; }
-
-.totals { margin: 0; align-self: end; }
+.checkout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px 28px; padding: 14px 24px 18px; background: var(--panel); border-top: 1px solid var(--line); }
+.totals { margin: 0; align-self: end; max-width: 300px; }
 .totals div { display: flex; justify-content: space-between; gap: 12px; color: var(--mute); font-variant-numeric: tabular-nums; }
 .totals dd { margin: 0; color: var(--chalk); }
-.totals .grand { align-items: baseline; margin-top: 4px; padding-top: 6px; border-top: 1px solid var(--line); color: var(--chalk); font-size: 1.15rem; }
-.totals .grand dd { font-size: 2.9rem; font-weight: 700; line-height: 1; color: var(--tag); letter-spacing: -.01em; }
-.saved { margin: 4px 0 0; text-align: right; color: var(--leaf); }
+.saved { margin: 6px 0 0; color: var(--leaf); }
 
-.lock { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 12px 14px; border: 2px solid var(--tomato); border-radius: 6px; background: rgba(255, 107, 94, .1); }
-.lock p { margin: 0; flex: 1 1 320px; font-family: var(--body); font-size: 1rem; }
 .pay { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
 .paybtn { position: relative; display: grid; align-content: center; justify-items: start; min-height: 68px; padding: 8px 54px 8px 16px; text-align: left; background: var(--raise); border: 1px solid var(--line); border-radius: 6px; font-size: 1.2rem; font-weight: 700; }
 .paybtn small { font-weight: 400; font-size: .85rem; color: var(--mute); }
@@ -119,7 +108,7 @@ dialog.dlg::backdrop { background: rgba(7, 11, 12, .78); }
 .dlg h2 { margin: 0 0 12px; font: 700 1.45rem/1.2 var(--display); }
 .dlg p { margin: 0 0 12px; }
 .dlg label { display: block; margin: 14px 0 4px; color: var(--mute); font-size: .92rem; }
-.dlg input:not([type=radio]) { width: 100%; height: 48px; padding: 0 12px; background: var(--well); border: 1px solid var(--line); border-radius: 6px; font: 1.3rem var(--display); }
+.dlg input:not([type=radio]):not([type=checkbox]) { width: 100%; height: 48px; padding: 0 12px; background: var(--well); border: 1px solid var(--line); border-radius: 6px; font: 1.3rem var(--display); }
 .dlg-btns { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; margin-top: 20px; }
 .dlg .big { font: 700 2.6rem/1 var(--display); color: var(--tag); margin-bottom: 14px; font-variant-numeric: tabular-nums; }
 .dlg .err { color: var(--tomato); min-height: 1.3em; margin: 8px 0 0; }
@@ -128,11 +117,12 @@ dialog.dlg::backdrop { background: rgba(7, 11, 12, .78); }
 .dlg .sums b { font-size: 1.7rem; font-variant-numeric: tabular-nums; }
 .quick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 #pinInput { letter-spacing: .6em; text-align: center; font-size: 1.8rem; }
-.map-list { display: grid; gap: 8px; max-height: 40vh; overflow-y: auto; }
-.map-opt { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; align-items: center; margin: 0 !important; padding: 10px 12px; border: 1px solid var(--line); border-radius: 6px; color: var(--chalk) !important; font-size: 1rem !important; cursor: pointer; }
+.map-list { display: grid; gap: 8px; max-height: 46vh; overflow-y: auto; padding: 2px; }
+.dlg .map-opt { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; align-items: center; margin: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 6px; color: var(--chalk); font-size: 1rem; cursor: pointer; }
 .map-opt:has(input:checked) { border-color: var(--tag); background: rgba(255, 207, 51, .08); }
 .map-opt input { grid-row: span 2; width: 20px; height: 20px; accent-color: var(--tag); }
 .map-opt span { color: var(--mute); font-size: .9rem; grid-column: 2; overflow-wrap: anywhere; }
+.map-opt strong { font-family: var(--display); font-size: 1.08rem; }
 .host-opt { display: grid; gap: 2px; text-align: left; padding: 10px 12px; }
 .host-opt span { color: var(--mute); font-weight: 400; font-size: .9rem; }
 .host-opt:disabled { opacity: .55; }
@@ -140,6 +130,28 @@ dialog.dlg::backdrop { background: rgba(7, 11, 12, .78); }
 .pulse { height: 6px; border-radius: 3px; background: var(--well); overflow: hidden; margin: 18px 0; }
 .pulse::after { content: ''; display: block; width: 35%; height: 100%; background: var(--tag); border-radius: 3px; animation: sweep 1.3s ease-in-out infinite alternate; }
 @keyframes sweep { from { translate: 0; } to { translate: 186%; } }
+
+.pill { font-size: .85rem; font-weight: 700; padding: 1px 8px; border-radius: 3px; background: var(--tomato); color: #2a0703; }
+.chip { min-height: 32px; padding: 0 12px; border: 1px solid var(--line); border-radius: 16px; background: transparent; color: var(--chalk); font-size: .92rem; font-weight: 600; align-self: center; }
+.chip:hover { background: var(--raise); }
+.chip.warn { border-color: var(--tag); color: var(--tag); }
+.chip.warn::before { content: '!'; display: inline-block; width: 1.15em; height: 1.15em; line-height: 1.15em; margin-right: .4em; border-radius: 50%; background: var(--tag); color: var(--tag-ink); text-align: center; font-weight: 800; }
+.weighed { text-align: center; font-size: 1.1rem; font-variant-numeric: tabular-nums; }
+.grandbox { display: grid; justify-items: end; align-content: end; }
+.grandbox span { color: var(--mute); }
+.grandbox strong { font-size: 3.1rem; font-weight: 700; line-height: 1; color: var(--tag); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.dlg select { width: 100%; height: 48px; padding: 0 10px; background: var(--well); color: var(--chalk); border: 1px solid var(--line); border-radius: 6px; font: 1.05rem var(--body); }
+.dlg .field[hidden] + .field { margin-top: 0; }
+.dlg .field .fine { margin: 4px 0 0; }
+.dlg .quick { align-items: center; }
+.dev-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.dev-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 14px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: 6px; }
+.dev-list strong { font: 700 1.1rem var(--display); margin-right: 8px; }
+.dev-list .words { display: block; color: var(--mute); font-size: .95rem; overflow-wrap: anywhere; }
+.scale-test { min-height: 2.7em; margin: 14px 0 0; padding: 10px 12px; background: var(--well); border: 1px solid var(--line); border-radius: 6px; }
+.scale-test:empty { display: none; }
+#weighNow { margin-bottom: 6px; }
+#weighState { min-height: 1.4em; }
 
 .veil { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: rgba(14, 20, 22, .9); border: 4px dashed var(--tag); font-size: 1.6rem; font-weight: 700; pointer-events: none; }
 .toasts { position: fixed; right: 20px; top: 14px; z-index: 60; display: grid; gap: 8px; width: min(370px, calc(100vw - 40px)); pointer-events: none; }
@@ -155,11 +167,16 @@ dialog.dlg::backdrop { background: rgba(7, 11, 12, .78); }
   .till { grid-template-rows: auto auto auto auto; }
   .cart-rows { max-height: 46vh; }
   .cart-head, .row { grid-template-columns: minmax(0, 1fr) 112px 76px 84px 40px; column-gap: 8px; }
-  .checkout { grid-template-columns: 1fr; }
   .tape { border-left: 0; border-top: 1px solid var(--line); }
   .paper { max-width: 380px; margin: 0 auto; }
   .bar, .cart, .checkout { padding-left: 14px; padding-right: 14px; }
   .scanline { margin: 0 14px; }
+}
+@media (max-width: 560px) {
+  .cart-head { display: none; }
+  .row { grid-template-columns: 112px minmax(0, 1fr) auto 40px; row-gap: 4px; }
+  .row-name { grid-column: 1 / -1; }
+  .weighed { text-align: left; }
 }
 @media (prefers-reduced-motion: reduce) { .row.is-new, .pulse::after { animation: none; } .switch .knob::after { transition: none; } }
 @media print { .till, .toasts, .veil, dialog { display: none !important; } .app { display: block; } .tape { border: 0; padding: 0; background: #fff; } .paper { box-shadow: none; } }
@@ -170,7 +187,8 @@ dialog.dlg::backdrop { background: rgba(7, 11, 12, .78); }
 .rcpt p { margin: 0; }
 .rcpt header { text-align: center; margin-bottom: 10px; }
 .rcpt .r-store { font-weight: 700; font-size: 1.2em; }
-.rcpt .r-meta { display: flex; justify-content: space-between; gap: 8px; }
+.rcpt .r-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 8px; }
+.rcpt .r-meta span { white-space: nowrap; }
 .rcpt hr { border: 0; border-top: 1px dashed currentColor; margin: 8px 0; }
 .rcpt ul { list-style: none; margin: 0; padding: 0; }
 .rcpt li { display: grid; grid-template-columns: auto 1fr auto; column-gap: 8px; align-items: end; margin-bottom: 6px; }
@@ -195,7 +213,7 @@ dialog.dlg::backdrop { background: rgba(7, 11, 12, .78); }
   <main class="till">
     <header class="bar">
       <h1 id="storeName">Checkout</h1>
-      <div class="bar-meta"><span id="linkLamp" class="lamp" hidden></span><span id="offlineLamp" class="lamp" hidden>Works offline</span><time id="clock"></time></div>
+      <div class="bar-meta"><span id="linkLamp" class="lamp" hidden></span><span id="offlineLamp" class="lamp" hidden>Works offline</span><time id="clock"></time><button type="button" class="chip" id="acctBtn" hidden>Accounts</button><button type="button" class="chip" id="devBtn">Devices</button></div>
     </header>
 
     <section class="scanline" aria-live="polite">
@@ -211,25 +229,19 @@ dialog.dlg::backdrop { background: rgba(7, 11, 12, .78); }
     </section>
 
     <section class="checkout" aria-label="Payment">
-      <div class="acct">
-        <label for="phone">Customer account number (phone)</label>
-        <input id="phone" data-keepfocus type="tel" inputmode="numeric" autocomplete="off" placeholder="Type the phone number, then Enter">
-        <div id="acctInfo"></div>
-      </div>
       <div>
         <dl class="totals">
           <div><dt>Subtotal</dt><dd id="tSub">$0.00</dd></div>
           <div id="tOffRow" hidden><dt>Coupons</dt><dd id="tOff"></dd></div>
           <div><dt id="tTaxLabel">Tax</dt><dd id="tTax">$0.00</dd></div>
-          <div class="grand"><dt>Total</dt><dd id="tTotal">$0.00</dd></div>
         </dl>
         <p id="tSaved" class="saved" hidden></p>
       </div>
-      <div class="lock" id="lock" hidden role="alert"><p id="lockMsg"></p></div>
+      <div class="grandbox"><span>Total</span><strong id="tTotal">$0.00</strong></div>
       <div class="pay">
         <button type="button" class="paybtn cash" id="payCash"><span>Pay cash</span><kbd>F2</kbd></button>
         <button type="button" class="paybtn" id="payCard"><span>Card / External Device</span><small id="cardHint"></small><kbd>F3</kbd></button>
-        <button type="button" class="paybtn" id="payAcct" hidden><span>Charge to Account</span><kbd>F4</kbd></button>
+        <button type="button" class="paybtn" id="payAcct" hidden><span>Charge to Account</span><small>Asks for the account number</small><kbd>F4</kbd></button>
       </div>
       <button type="button" class="switch" id="manualToggle" role="switch" aria-checked="false"><span class="knob"></span>Manual Standalone Card Device Capture</button>
     </section>
@@ -266,15 +278,28 @@ dialog.dlg::backdrop { background: rgba(7, 11, 12, .78); }
   <div class="dlg-btns"><button type="button" class="btn ghost" data-close>Cancel</button><button class="btn primary">Take payment</button></div>
 </form></dialog>
 
-<dialog id="mapDlg" class="dlg"><form>
-  <h2>Which card device does this register use?</h2>
-  <p>This is asked once per register. Card totals are pushed to the device you pick.</p>
-  <div id="mapList" class="map-list" role="radiogroup" aria-label="Card device profiles"></div>
-  <label for="mapEndpoint">Device address for this register</label>
-  <input id="mapEndpoint" autocomplete="off" spellcheck="false">
-  <p id="mapSerial" class="fine" hidden><button type="button" class="btn small" id="mapGrant">Choose serial port</button> <span id="mapSerialState"></span></p>
-  <p id="mapErr" class="err" role="alert"></p>
-  <div class="dlg-btns"><button type="button" class="btn ghost" data-close>Cancel</button><button class="btn primary">Use this device</button></div>
+<dialog id="formDlg" class="dlg"><form>
+  <h2 id="formTitle"></h2><div id="formBody"></div>
+  <p id="formErr" class="err" role="alert"></p>
+  <div id="formBtns" class="dlg-btns"></div>
+</form></dialog>
+
+<dialog id="devDlg" class="dlg">
+  <h2>This register’s devices</h2>
+  <p class="fine">Each register keeps its own. A device is asked for the first time it is needed, and you can change it here.</p>
+  <ul id="devList" class="dev-list"></ul>
+  <div class="dlg-btns"><button type="button" class="btn primary" data-close>Done</button></div>
+</dialog>
+
+<dialog id="weighDlg" class="dlg"><form>
+  <h2 id="weighTitle"></h2>
+  <p id="weighRate" class="fine"></p>
+  <p class="big" id="weighNow"></p>
+  <p id="weighState" role="status"></p>
+  <label for="weighIn" id="weighLabel"></label>
+  <input id="weighIn" inputmode="decimal" autocomplete="off">
+  <p id="weighErr" class="err" role="alert"></p>
+  <div class="dlg-btns"><button type="button" class="btn ghost" data-close>Cancel</button><button type="button" class="btn" id="weighSetup">Scale setup</button><button class="btn primary">Add to sale</button></div>
 </form></dialog>
 
 <dialog id="hostDlg" class="dlg"><form>
@@ -291,7 +316,7 @@ dialog.dlg::backdrop { background: rgba(7, 11, 12, .78); }
   <h2>Waiting for Hardware Payment…</h2>
   <p class="big" id="waitAmt"></p>
   <p id="waitDev"></p>
-  <p id="waitSim" class="err" hidden>Simulator profile: no card is being charged.</p>
+  <p id="waitSim" class="err" hidden>Practice device: no card is being charged.</p>
   <div class="pulse" aria-hidden="true"></div>
   <p class="fine">If you cancel here, check the card device as well. A card that was already tapped may still be charged.</p>
   <div class="dlg-btns"><button type="button" class="btn ghost" id="waitCancel">Cancel payment</button></div>
@@ -381,10 +406,37 @@ const Core = (() => {
 
   /* ---------- schema ---------- */
   const PROMO_TYPES = ['percentage', 'fixed', 'clearance'];
+  /* Items sold by weight: the price is per one of these units. */
+  const GRAMS = { lb: 453.59237, kg: 1000, oz: 28.349523125, g: 1 };
+  const round3 = n => Math.round(n * 1000) / 1000;
+  const convertWeight = (value, from, to) => round3(value * GRAMS[from] / GRAMS[to]);
+  /* What the owner asks for when an account is opened. The phone number is the account number and is always asked.
+     use: 'off' (not asked), 'optional', or 'required'. Fields the owner adds get ids starting with "x_". */
+  const ACCOUNT_PRESETS = [['name', 'Full name', 'required'], ['first_name', 'First name', 'off'], ['last_name', 'Last name', 'off'],
+    ['address', 'Address', 'required'], ['phone2', 'Other phone', 'off'], ['card', 'Store card number', 'off']];
+  const USES = ['off', 'optional', 'required'];
+  function accountFields(saved) {
+    const list = Array.isArray(saved) ? saved.filter(f => f && typeof f === 'object') : [], byId = new Map(list.map(f => [String(f.id), f]));
+    const label = (f, dflt) => String(f?.label ?? '').trim().slice(0, 40) || dflt;
+    const out = ACCOUNT_PRESETS.map(([id, text, use]) => ({ id, label: label(byId.get(id), text), use: USES.includes(byId.get(id)?.use) ? byId.get(id).use : use }));
+    for (const f of list) {
+      const id = String(f.id);
+      if (/^x_[a-z0-9]{1,12}$/.test(id) && label(f, '') && !out.some(o => o.id === id) && out.length < 18) out.push({ id, label: label(f, ''), use: USES.includes(f.use) ? f.use : 'optional' });
+    }
+    return out;
+  }
+  const cleanFields = raw => {
+    const out = {};
+    for (const [k, v] of Object.entries(obj(raw))) { const text = String(v ?? '').trim().slice(0, 200); if (/^[a-z0-9_]{1,16}$/.test(k) && text) out[k] = text; }
+    return out;
+  };
+  /* The name shown for an account: the full name, or first and last, or the account number when no name is kept. */
+  const accountName = (phone, fields) => fields.name || [fields.first_name, fields.last_name].filter(Boolean).join(' ') || `Account ${phone}`;
   const emptyDb = () => ({
     inventory: {}, promotions: {}, customers: {},
     payment_devices: { ACTIVE_PROFILE_ID: '', profiles: {} },
-    settings: { pin_hash: '', receipt_header: '', credit_allowed_globally: true, global_credit_duration_days: 7, printing_enabled: true, tax_rate_percent: 0, last_modified: '' },
+    settings: { pin_hash: '', receipt_header: '', credit_allowed_globally: true, global_credit_duration_days: 7, printing_enabled: true, tax_rate_percent: 0, last_modified: '',
+      account_prefix: '', registers_open_accounts: true, account_fields: accountFields() },
     sales_history: []
   });
   const obj = v => (v && typeof v === 'object' && !Array.isArray(v)) ? v : {};
@@ -404,7 +456,7 @@ const Core = (() => {
       const key = safeKey(code);
       if (!key || !it || typeof it !== 'object') { skipped.push(`inventory "${code}"`); continue; }
       /* Only the barcode is required. No name: the barcode is shown. No price: the cashier types it. No stock: not counted. */
-      db.inventory[key] = { name: String(it.name ?? '').trim() || `Item ${key}`, price: blank(it.price) ? null : money(it.price), sale_price: money(it.sale_price), stock: blank(it.stock) ? null : Math.trunc(Number(it.stock)) || 0, category: String(it.category ?? '').trim(), taxable: bool(it.taxable, false) };
+      db.inventory[key] = { name: String(it.name ?? '').trim() || `Item ${key}`, price: blank(it.price) ? null : money(it.price), sale_price: money(it.sale_price), stock: blank(it.stock) ? null : (has(GRAMS, it.by_weight) ? round3(Number(it.stock)) : Math.trunc(Number(it.stock))) || 0, category: String(it.category ?? '').trim(), taxable: bool(it.taxable, false), by_weight: has(GRAMS, it.by_weight) ? it.by_weight : '' };
     }
     for (const [code, p] of Object.entries(obj(raw.promotions))) {
       const key = safeKey(code), type = String(obj(p).type ?? '').toLowerCase(), value = Number(obj(p).value);
@@ -412,9 +464,10 @@ const Core = (() => {
       db.promotions[key] = { type, value, applies_to: String(p.applies_to ?? 'all').trim() || 'all' };
     }
     for (const [phone, c] of Object.entries(obj(raw.customers))) {
-      const key = phoneKey(phone), name = String(obj(c).name ?? '').trim();
-      if (key.length < 4 || !name) { skipped.push(`customer "${phone}"`); continue; }
-      db.customers[key] = { name, balance_due: money(c.balance_due), due_date: isDate(c.due_date) ? c.due_date : null, status: c.status === 'frozen' ? 'frozen' : 'active' };
+      const key = phoneKey(phone), old = String(obj(c).name ?? '').trim(), fields = cleanFields(obj(c).fields);
+      if (key.length < 4 || key.length > 15 || !c || typeof c !== 'object') { skipped.push(`customer "${phone}"`); continue; }
+      if (old && old !== `Account ${key}` && !fields.name && !fields.first_name && !fields.last_name) fields.name = old.slice(0, 200);   // files from before account fields
+      db.customers[key] = { name: accountName(key, fields), fields, balance_due: money(c.balance_due), due_date: isDate(c.due_date) ? c.due_date : null, status: c.status === 'frozen' ? 'frozen' : 'active' };
     }
     const pd = obj(raw.payment_devices);
     for (const [id, p] of Object.entries(obj(pd.profiles))) {
@@ -435,10 +488,29 @@ const Core = (() => {
       global_credit_duration_days: days >= 0 ? days : 7,
       printing_enabled: bool(s.printing_enabled, true),
       tax_rate_percent: tax >= 0 && tax <= 100 ? tax : 0,
-      last_modified: typeof s.last_modified === 'string' && !Number.isNaN(Date.parse(s.last_modified)) ? s.last_modified : ''
+      last_modified: typeof s.last_modified === 'string' && !Number.isNaN(Date.parse(s.last_modified)) ? s.last_modified : '',
+      account_prefix: phoneKey(s.account_prefix).slice(0, 10),
+      registers_open_accounts: bool(s.registers_open_accounts, true),
+      account_fields: accountFields(s.account_fields)
     };
     db.sales_history = (Array.isArray(raw.sales_history) ? raw.sales_history : []).filter(r => r && typeof r === 'object' && r.id);
     return { db, skipped };
+  }
+
+  /* Data saved by an earlier version of the apps gains the newer fields the first time it is read. */
+  function upgrade(core) {
+    if (!core || typeof core !== 'object') return core;
+    const s = core.settings ||= {};
+    if (!Array.isArray(s.account_fields) || s.account_fields.length < ACCOUNT_PRESETS.length) s.account_fields = accountFields(s.account_fields);
+    if (typeof s.account_prefix !== 'string') s.account_prefix = '';
+    if (typeof s.registers_open_accounts !== 'boolean') s.registers_open_accounts = true;
+    for (const it of Object.values(core.inventory || {})) if (typeof it.by_weight !== 'string') it.by_weight = '';
+    for (const [key, c] of Object.entries(core.customers || {})) {
+      if (c.fields && typeof c.fields === 'object') continue;
+      c.fields = c.name && c.name !== `Account ${key}` ? { name: String(c.name).slice(0, 200) } : {};
+      c.name = accountName(key, c.fields);
+    }
+    return core;
   }
 
   const isOverdue = (c, today = isoDate()) => toCents(c.balance_due) > 0 && !!c.due_date && today > c.due_date;
@@ -450,6 +522,11 @@ const Core = (() => {
   /* What one sale or account payment does to stock and balances. The register runs it at the moment of sale, the host
      runs it once when a register reports the sale, and a register replays it for sales the host has not confirmed. */
   function applyRecord(core, rec) {
+    if (rec.type === 'account_open') {                    // an account opened at a register: created once, never overwritten
+      const key = phoneKey(rec.customer), fields = cleanFields(rec.fields);
+      if (key.length >= 4 && key.length <= 15 && !has(core.customers, key)) core.customers[key] = { name: accountName(key, fields), fields, balance_due: 0, due_date: null, status: 'active' };
+      return;
+    }
     const acct = rec.customer && has(core.customers, rec.customer) ? core.customers[rec.customer] : null;
     if (rec.type === 'account_payment') {
       if (!acct) return;
@@ -458,7 +535,12 @@ const Core = (() => {
       if (left === 0) { acct.due_date = null; acct.status = 'active'; }
       return;
     }
-    for (const it of rec.items || []) if (has(core.inventory, it.barcode) && core.inventory[it.barcode].stock !== null) core.inventory[it.barcode].stock -= Math.trunc(Number(it.qty)) || 0;
+    for (const it of rec.items || []) {
+      const item = has(core.inventory, it.barcode) ? core.inventory[it.barcode] : null;
+      if (!item || item.stock === null) continue;
+      const count = Math.trunc(Number(it.qty)) || 0;
+      item.stock = it.weight > 0 ? round3(item.stock - Number(it.weight) * count) : item.stock - count;      // weighed items count down by weight
+    }
     if (rec.payment?.method === 'account' && acct) {
       const before = toCents(acct.balance_due);
       acct.balance_due = toMoney(before + toCents(rec.total));
@@ -496,7 +578,7 @@ const Core = (() => {
         const kv = tx.objectStore('kv'), get = kv.get('core');
         get.onsuccess = () => {
           try {
-            const c = get.result || stripSales(emptyDb());
+            const c = upgrade(get.result) || stripSales(emptyDb());
             change(c); kv.put(c, 'core');
             for (const r of records) tx.objectStore('sales').put(r);
             done(c);
@@ -507,7 +589,7 @@ const Core = (() => {
       return core;
     }
     async function load() {
-      return run(['kv'], 'readonly', (tx, done) => { const g = tx.objectStore('kv').get('core'); g.onsuccess = () => done(g.result || null); });
+      return run(['kv'], 'readonly', (tx, done) => { const g = tx.objectStore('kv').get('core'); g.onsuccess = () => done(upgrade(g.result) || null); });
     }
     async function allSales() {
       const rows = await run(['sales'], 'readonly', (tx, done) => { const g = tx.objectStore('sales').getAll(); g.onsuccess = () => done(g.result); });
@@ -656,7 +738,261 @@ const Core = (() => {
     return { SERVICE, rid: randomHex, proof, publish, subscribe, areaTopic, offer, answer, wire, prettyCode };
   })();
 
-  return { applyRecord, stampOf, stampNow, Link, toCents, toMoney, fmt, pad2, isoDate, addDays, phoneKey, isDate, sha256, hashPin, verifyPin, tryPin, PROMO_TYPES, emptyDb, normalizeDb, has, safeKey, isOverdue, isFrozen, needsFreeze, freezeOverdue, Store, compile, download, readDbFiles, h, registerOffline };
+  return { applyRecord, stampOf, stampNow, Link, GRAMS, round3, convertWeight, accountFields, cleanFields, accountName, toCents, toMoney, fmt, pad2, isoDate, addDays, phoneKey, isDate, sha256, hashPin, verifyPin, tryPin, PROMO_TYPES, emptyDb, normalizeDb, has, safeKey, isOverdue, isFrozen, needsFreeze, freezeOverdue, Store, compile, download, readDbFiles, h, registerOffline };
+})();
+</script>
+<script>
+/* ===== Devices: scale protocols, barcode rules and the browser transports under them. Checkout terminal only. =====
+   Scale readings all have one shape: { weight, unit, stable, note }.
+     weight  number, or null when the scale has no weight to give right now
+     unit    'lb' | 'kg' | 'oz' | 'g', or null when the protocol does not say (the register's setup supplies it)
+     stable  true | false, or null when the protocol carries no steady/moving flag
+     note    why there is no weight ('moving', 'below zero', 'over capacity', ...)                              */
+const Devices = (() => {
+  'use strict';
+  const SOH = 1, STX = 2, ETX = 3, EOT = 4, ENQ = 5, ACK = 6, LF = 10, CR = 13, DC1 = 17, NAK = 21;
+  const chars = bytes => bytes.map(b => String.fromCharCode(b & 0x7f)).join('');      // 7-bit text; a parity bit is dropped
+  const UNIT = { LB: 'lb', LBS: 'lb', KG: 'kg', OZ: 'oz', G: 'g', GM: 'g' };
+  const reading = (weight, unit, stable, note = null) => ({ weight, unit, stable, note });
+
+  /* ---------- NCI / Weigh-Tronix ECR. Ask "W<CR>". Answer "<LF>xx.xxxLB<CR><LF>Shh<CR><ETX>", or only the status part
+     "<LF>Shh<CR><ETX>" when the scale is moving, under zero or over capacity. ---------- */
+  function parseNci(buf) {
+    const end = buf.indexOf(ETX);
+    if (end < 0) return null;
+    const frame = chars(buf.slice(0, end)), rest = buf.slice(end + 1);
+    const st = /S([0-\x7f]{2,3})\s*$/.exec(frame);
+    if (!st) return { rest, reading: null };                                            // "?" (bad command) or noise
+    const s1 = st[1].charCodeAt(0), s2 = st[1].charCodeAt(1);
+    const moving = !!(s1 & 1), under = !!(s2 & 1), over = !!(s2 & 2), body = frame.slice(0, st.index);
+    const lbOz = /(\d+)\s*LB\s+(\d+(?:\.\d+)?)\s*OZ/i.exec(body), plain = /(-?)\s*(\d+(?:\.\d+)?)\s*(LBS?|KG|OZ|GM|G)\b/i.exec(body);
+    if (lbOz) return { rest, reading: reading(Number(lbOz[1]) + Number(lbOz[2]) / 16, 'lb', !moving) };
+    if (plain && !plain[1] && !under && !over) return { rest, reading: reading(Number(plain[2]), UNIT[plain[3].toUpperCase()], !moving) };
+    return { rest, reading: reading(null, null, false, moving ? 'moving' : under || plain?.[1] ? 'below zero' : over ? 'over capacity' : 'no weight') };
+  }
+
+  /* ---------- Mettler Toledo 8217. Ask "W". Answer "<STX>xx.xxx<CR>" when steady, or "<STX>?<status><CR>" when not.
+     The answer carries no unit: the register is told lb or kg at setup. ---------- */
+  function parse8217(buf) {
+    const end = buf.indexOf(CR);
+    if (end < 0) return null;
+    const start = buf.lastIndexOf(STX, end), rest = buf.slice(end + 1);
+    if (start < 0) return { rest, reading: null };
+    const frame = chars(buf.slice(start + 1, end));
+    if (frame[0] === '?') {
+      const s = frame.charCodeAt(1) || 0;
+      return { rest, reading: reading(null, null, false, s & 1 ? 'moving' : s & 2 ? 'over capacity' : s & 4 ? 'below zero' : s & 8 ? 'needs zeroing' : 'no weight') };
+    }
+    const m = /^\s*(\d{1,3}\.\d{1,3})\s*$/.exec(frame);                             // a weight with no decimal point is not trusted
+    return { rest, reading: m ? reading(Number(m[1]), null, true) : null };
+  }
+
+  /* ---------- CAS (PD-II, PD-1, ER, AP and scales that copy it). Send ENQ, the scale answers ACK, send DC1, then:
+     <SOH><STX> STA SIGN weight(5-6) unit(1-2) BCC <ETX><EOT>. STA is S steady, U moving, F overload. ---------- */
+  function parseCas(buf) {
+    const soh = buf.findIndex((b, i) => b === SOH && buf[i + 1] === STX);
+    const ack = buf.indexOf(ACK);
+    if (ack >= 0 && (soh < 0 || ack < soh)) return { rest: buf.slice(ack + 1), reading: null, ack: true };
+    if (soh < 0) return buf.length > 64 ? { rest: buf.slice(-8), reading: null } : null;
+    const end = buf.findIndex((b, i) => i > soh + 4 && b === ETX && buf[i + 1] === EOT);
+    if (end < 0) return buf.length - soh > 40 ? { rest: buf.slice(soh + 2), reading: null } : null;
+    const data = buf.slice(soh + 2, end - 1), bcc = buf[end - 1], rest = buf.slice(end + 2);
+    const xor = data.reduce((x, b) => x ^ b, 0);
+    if (bcc !== xor && bcc !== (xor ^ STX) && bcc !== (xor ^ SOH ^ STX)) return { rest, reading: null, corrupt: true };
+    const text = chars(data), m = /^([SUF])([- ])([\d. ]{5,7}?)\s*([A-Za-z]{1,2})\s*$/.exec(text);
+    if (!m) return { rest, reading: null };
+    const unit = UNIT[m[4].toUpperCase()] || null, weight = Number(m[3].replace(/\s/g, ''));
+    if (m[1] === 'F') return { rest, reading: reading(null, unit, false, 'over capacity') };
+    if (m[2] === '-') return { rest, reading: reading(null, unit, false, 'below zero') };
+    return { rest, reading: Number.isFinite(weight) && unit ? reading(weight, unit, m[1] === 'S') : null };
+  }
+
+  /* ---------- Scales that simply send text lines, on their own or when asked (A&D "ST,+001.234 kg", Mettler/Ohaus
+     "S S     1.234 kg", "  1.25 lb", ...). The newest complete line wins. ---------- */
+  function parseStream(buf) {
+    let end = -1;
+    for (let i = buf.length - 1; i >= 0; i--) if (buf[i] === CR || buf[i] === LF) { end = i; break; }
+    if (end < 0) return buf.length > 96 ? { rest: buf.slice(-32), reading: null } : null;
+    const lines = chars(buf.slice(0, end)).split(/[\r\n]+/).map(l => l.replace(/[\x00-\x1f]/g, ' ').trim()).filter(Boolean);
+    const rest = buf.slice(end + 1), line = lines[lines.length - 1];
+    if (!line) return { rest, reading: null };
+    const up = ` ${line.toUpperCase()} `;
+    const nums = [...line.matchAll(/([+-]?)\s*(\d+(?:\.\d+)?)\s*(kg|lbs?|oz|gm|g)?(?![A-Za-z0-9.])/gi)];
+    const hit = nums.filter(m => m[3]).pop() || nums.filter(m => m[2].includes('.')).pop();
+    if (!hit) return { rest, reading: null };
+    const unit = hit[3] ? UNIT[hit[3].toUpperCase()] : null;
+    if (/[ ,](OL|S \+|S -)[ ,]|OVER/.test(up)) return { rest, reading: reading(null, unit, false, 'over capacity') };
+    if (hit[1] === '-') return { rest, reading: reading(null, unit, false, 'below zero') };
+    const moving = /[ ,](US|SD|S D|S I)[ ,]|\?|MOTION|UNSTABLE/.test(up), steady = /[ ,](ST|S S)[ ,]|STABLE/.test(up);
+    return { rest, reading: reading(Number(hit[2]), unit, moving ? false : steady ? true : null) };
+  }
+
+  /* ---------- USB scales of the standard "HID point of sale scale" kind (usage page 0x8D). Data report 3:
+     status, unit, exponent (signed), weight low byte, weight high byte. ---------- */
+  const HID_UNITS = [null, 'mg', 'g', 'kg', null, null, null, null, null, null, null, 'oz', 'lb'];
+  const HID_NOTES = { 1: 'scale fault', 3: 'moving', 5: 'below zero', 6: 'over capacity', 7: 'needs calibration', 8: 'needs zeroing' };
+  function parseHid(reportId, data) {
+    if (reportId !== 3 || data.length < 5) return null;
+    const status = data[0], exp = data[2] > 127 ? data[2] - 256 : data[2];
+    let unit = HID_UNITS[data[1]] ?? null, weight = (data[3] | (data[4] << 8)) * 10 ** exp;
+    if (unit === 'mg') { unit = 'g'; weight /= 1000; }
+    if (status === 2) return reading(0, unit, true);
+    if (status === 4) return unit ? reading(Math.round(weight * 1e5) / 1e5, unit, true) : reading(null, null, false, 'a unit this register does not use');
+    if (status === 3 && unit) return reading(Math.round(weight * 1e5) / 1e5, unit, false);
+    return reading(null, unit, false, HID_NOTES[status] || 'no weight');
+  }
+
+  const PROTOCOLS = {
+    nci: { name: 'NCI / Weigh-Tronix', poll: [0x57, CR], parse: parseNci, serial: { baud: 9600, bits: 7, parity: 'even' } },
+    m8217: { name: 'Mettler Toledo 8217', poll: [0x57], parse: parse8217, serial: { baud: 9600, bits: 7, parity: 'even' }, needsUnit: true },
+    cas: { name: 'CAS', poll: [ENQ], parse: parseCas, serial: { baud: 9600, bits: 8, parity: 'none' } },
+    sics: { name: 'Mettler / Ohaus (asks for each weight)', poll: [0x53, 0x49, CR, LF], parse: parseStream, serial: { baud: 9600, bits: 8, parity: 'none' } },
+    stream: { name: 'Scale sends weights on its own', poll: null, parse: parseStream, serial: { baud: 9600, bits: 8, parity: 'none' } }
+  };
+
+  /* ---------- barcodes ---------- */
+  const upcCheck = d11 => { let s = 0; for (let i = 0; i < 11; i++) s += Number(d11[i]) * (i % 2 ? 1 : 3); return String((10 - s % 10) % 10); };
+  /* Other spellings of the same barcode: scanners differ on the leading 0 of a UPC and on a leading symbology letter. */
+  function scanVariants(code) {
+    const out = [code], bare = code.replace(/^[A-Za-z]{1,3}(?=\d{6,}$)/, '');
+    if (bare !== code) out.push(bare);
+    if (/^0\d{12}$/.test(bare)) out.push(bare.slice(1));
+    if (/^\d{12}$/.test(bare)) out.push('0' + bare);
+    return out;
+  }
+  /* A label printed by a deli or meat scale: UPC-A "2 IIIII V PPPP C" carries the item number and the price. */
+  function embeddedPrice(code) {
+    const upc = scanVariants(code).find(c => /^2\d{11}$/.test(c));
+    if (!upc || upcCheck(upc) !== upc[11]) return null;
+    return { item: upc.slice(1, 6), cents: Number(upc.slice(7, 11)) };
+  }
+
+  /* ---------- transports. Each gives { write(bytes), close() } and calls onBytes(array) / onLost(). ---------- */
+  async function openSerial(port, { baud = 9600, bits = 8, parity = 'none' }, onBytes, onLost) {
+    await port.open({ baudRate: baud, dataBits: bits, parity, stopBits: 1, flowControl: 'none' });
+    let reader = null, closing = false, faults = 0;
+    const pump = (async () => {
+      /* A framing or parity fault ends one stream and the port hands out a fresh one. When the device is unplugged,
+         port.readable becomes null and the loop ends. */
+      while (port.readable && !closing && faults < 200) {
+        try { reader = port.readable.getReader(); } catch { break; }
+        try { for (;;) { const { value, done } = await reader.read(); if (done) break; if (value?.length) onBytes(Array.from(value)); } }
+        catch { faults++; }
+        finally { try { reader.releaseLock(); } catch { /* already released */ } }
+      }
+      if (!closing) onLost?.();
+    })();
+    let queue = Promise.resolve();                         // writes go out one at a time, in order
+    return {
+      write(bytes) {
+        const send = async () => { const w = port.writable?.getWriter(); if (!w) return; try { await w.write(new Uint8Array(bytes)); } finally { w.releaseLock(); } };
+        return (queue = queue.then(send, send));
+      },
+      async close() { closing = true; try { await reader?.cancel(); } catch { /* already ended */ } await pump; try { await port.close(); } catch { /* already closed */ } }
+    };
+  }
+  function openSocket(url, onBytes, onLost) {
+    return new Promise((resolve, reject) => {
+      const ws = new WebSocket(url); let live = false, closing = false;
+      ws.binaryType = 'arraybuffer';
+      ws.onopen = () => { live = true; resolve({ write: async bytes => { if (ws.readyState === 1) ws.send(new Uint8Array(bytes)); }, close: async () => { closing = true; ws.close(); } }); };
+      ws.onmessage = e => onBytes(typeof e.data === 'string' ? [...new TextEncoder().encode(e.data)] : Array.from(new Uint8Array(e.data)));
+      ws.onerror = () => { if (!live) reject(new Error('unreachable')); };
+      ws.onclose = () => { if (live && !closing) onLost?.(); };
+    });
+  }
+  async function openPoll(url, onBytes, onLost) {
+    let stop = false, fails = 0;
+    const once = async () => { const res = await fetch(url, { cache: 'no-store' }); if (!res.ok) throw new Error('bad'); onBytes([...new TextEncoder().encode((await res.text()) + '\n')]); };
+    await once();
+    (async () => { while (!stop) { await new Promise(r => setTimeout(r, 350)); if (stop) break; try { await once(); fails = 0; } catch { if (++fails >= 4) { onLost?.(); break; } } } })();
+    return { write: async () => {}, close: async () => { stop = true; } };
+  }
+
+  /* Feeds bytes through one protocol and reports each reading. Returns the link's stop function. */
+  function runProtocol(link, protocol, onReading) {
+    const proto = PROTOCOLS[protocol]; let buf = [];
+    const feed = bytes => {
+      buf.push(...bytes);
+      if (buf.length > 600) buf = buf.slice(-300);
+      for (let r; (r = proto.parse(buf));) {
+        buf = r.rest;
+        if (r.ack) link()?.write([DC1]).catch(() => {});
+        if (r.reading) onReading(r.reading);
+      }
+    };
+    let timer = null;
+    const ask = () => { link()?.write(proto.poll).catch(() => {}); };
+    return { feed, start: () => { if (proto.poll) { ask(); timer = setInterval(ask, 300); } }, stop: () => clearInterval(timer) };
+  }
+
+  /* Opens the scale described by cfg and reports readings until stopped. handle is the SerialPort or HIDDevice. */
+  async function watchScale(cfg, handle, onReading, onLost) {
+    if (cfg.kind === 'hid') {
+      if (!handle.opened) await handle.open();
+      const onReport = e => { const r = parseHid(e.reportId, new Uint8Array(e.data.buffer, e.data.byteOffset, e.data.byteLength)); if (r) onReading(r); };
+      handle.addEventListener('inputreport', onReport);
+      return async () => { handle.removeEventListener('inputreport', onReport); try { await handle.close(); } catch { /* unplugged */ } };
+    }
+    let link = null;
+    const run = runProtocol(() => link, cfg.protocol, onReading);
+    if (cfg.kind === 'serial') link = await openSerial(handle, cfg, run.feed, onLost);
+    else if (/^wss?:\/\//i.test(cfg.url)) link = await openSocket(cfg.url, run.feed, onLost);
+    else link = await openPoll(/^https?:\/\//i.test(cfg.url) ? cfg.url : 'http://' + cfg.url, run.feed, onLost);
+    run.start();
+    return async () => { run.stop(); await link.close(); };
+  }
+
+  /* "Find my scale": tries the usual line settings and every protocol until one produces a reading. */
+  const TRIES = [{ baud: 9600, bits: 7, parity: 'even' }, { baud: 9600, bits: 8, parity: 'none' }, { baud: 9600, bits: 7, parity: 'odd' },
+    { baud: 4800, bits: 7, parity: 'even' }, { baud: 2400, bits: 7, parity: 'even' }, { baud: 19200, bits: 8, parity: 'none' }];
+  const pause = ms => new Promise(r => setTimeout(r, ms));
+  async function detectSerial(port, say, cancelled = () => false) {
+    for (const line of TRIES) {
+      if (cancelled()) return null;
+      say?.(`Trying ${line.baud} baud, ${line.bits} data bits, ${line.parity} parity…`);
+      let buf = [], link;
+      try { link = await openSerial(port, line, bytes => { buf.push(...bytes); }); } catch { return null; }
+      try {
+        const got = name => { const copy = buf.slice(); for (let r, b = copy; (r = PROTOCOLS[name].parse(b)); b = r.rest) if (r.reading) return true; return false; };
+        await pause(700);
+        if (got('stream')) return { protocol: 'stream', ...line };
+        buf = []; await link.write([0x57, CR]); await pause(600);
+        if (got('nci')) return { protocol: 'nci', ...line };
+        if (got('m8217')) return { protocol: 'm8217', ...line };
+        buf = []; await link.write([ENQ]); await pause(350);
+        if (buf.includes(ACK)) { buf = []; await link.write([DC1]); await pause(500); if (got('cas')) return { protocol: 'cas', ...line }; }
+        buf = []; await link.write([0x53, 0x49, CR, LF]); await pause(600);
+        if (got('stream')) return { protocol: 'sics', ...line };
+      } catch { /* try the next setting */ } finally { await link.close(); }
+    }
+    return null;
+  }
+
+  /* ---------- remembering which device a register was set up with ---------- */
+  const serialOk = () => 'serial' in navigator, hidOk = () => 'hid' in navigator;
+  function portSig(port) {
+    const i = port.getInfo();
+    return i.bluetoothServiceClassId ? `bt:${i.bluetoothServiceClassId}` : i.usbVendorId != null ? `usb:${i.usbVendorId}:${i.usbProductId}` : 'com';
+  }
+  async function portMark(port) {                           // signature plus position among look-alike ports
+    const sig = portSig(port), same = (await navigator.serial.getPorts()).filter(p => portSig(p) === sig);
+    return { sig, ord: Math.max(0, same.indexOf(port)) };
+  }
+  async function findPort(mark) {
+    if (!serialOk() || !mark) return null;
+    const same = (await navigator.serial.getPorts()).filter(p => portSig(p) === mark.sig);
+    return same[mark.ord] || same[0] || null;
+  }
+  const hidMark = dev => ({ vid: dev.vendorId, pid: dev.productId, name: dev.productName || 'USB scale' });
+  async function findHid(mark) {
+    if (!hidOk() || !mark) return null;
+    return (await navigator.hid.getDevices()).find(d => d.vendorId === mark.vid && d.productId === mark.pid) || null;
+  }
+  const portWords = mark => !mark ? '' : mark.sig.startsWith('bt:') ? 'Bluetooth serial port' : mark.sig.startsWith('usb:') ? 'USB serial port' : 'serial (COM) port';
+
+  return { PROTOCOLS, parseNci, parse8217, parseCas, parseStream, parseHid, upcCheck, scanVariants, embeddedPrice,
+    openSerial, watchScale, detectSerial, serialOk, hidOk, portMark, findPort, hidMark, findHid, portWords };
 })();
 </script>
 <script>
@@ -668,19 +1004,22 @@ const Core = (() => {
     get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* storage blocked: the choice lasts this session only */ } }
   };
-  const K_DEVICE = 'pos.station.device', K_MANUAL = 'pos.station.manual_card', K_STATION = 'pos.station.id';
+  const K_DEVICE = 'pos.station.device', K_DEVICES = 'pos.station.devices', K_MANUAL = 'pos.station.manual_card', K_STATION = 'pos.station.id';
   const HARDWARE_TIMEOUT_MS = 120000;
   let station = LS.get(K_STATION);
   if (!station) { station = 'REG-' + Math.random().toString(36).slice(2, 6).toUpperCase(); LS.set(K_STATION, station); }
 
   let DB = null;                 // everything except sales_history
-  const cart = new Map();        // barcode -> quantity
+  const cart = new Map();        // cart key -> count (the key forms are described at the pricing engine)
   const coupons = new Set();     // promotion codes scanned for this sale
-  let customer = null;           // phone key of the attached account
   let lastSale = null;           // finished receipt, shown until the next scan
   let busy = false;              // a payment is in flight
-  let flash = null;              // barcode to highlight on the next render
+  let flash = null;              // cart key to highlight on the next render
   let manualCard = LS.get(K_MANUAL) === true;
+  /* This register's own devices: { card, scale, scanner, printer }. Nothing here travels in the sync file. */
+  const DEV = LS.get(K_DEVICES) || {};
+  const saveDev = () => LS.set(K_DEVICES, DEV);
+  if (!DEV.card) { const old = LS.get(K_DEVICE); if (old?.profile_id) { DEV.card = { kind: 'profile', profile_id: old.profile_id, endpoint: old.endpoint || '', port: null }; saveDev(); } }
 
   /* ---------- small UI helpers ---------- */
   function toast(text, kind = '') {
@@ -736,10 +1075,39 @@ const Core = (() => {
     });
   }
 
+  /* A dialog that stays open until its answer is acceptable: onOk returns a message to keep it open. Resolves with
+     'ok', the value of an extra button, or '' when cancelled. */
+  function formDialog({ title, body, ok = 'Save', extra = [], onOk, onShow, focus }) {
+    const dlg = $('formDlg'), form = dlg.querySelector('form');
+    $('formTitle').textContent = title; $('formErr').textContent = '';
+    $('formBody').replaceChildren(...[].concat(body).filter(Boolean).map(b => typeof b === 'string' ? h('p', { text: b }) : b));
+    $('formBtns').replaceChildren(h('button', { type: 'button', class: 'btn ghost', text: 'Cancel', onclick: () => dlg.close('') }),
+      ...extra.map(b => h('button', { type: 'button', class: 'btn', text: b.label, onclick: () => dlg.close(b.value) })), h('button', { class: 'btn primary', text: ok }));
+    return new Promise(res => {
+      let working = false;
+      const submit = async e => {
+        e.preventDefault();
+        if (working) return;
+        working = true; $('formErr').textContent = '';
+        try { const problem = await onOk?.(); if (problem) $('formErr').textContent = problem; else dlg.close('ok'); }
+        catch (err) { $('formErr').textContent = err.message; }
+        working = false;
+      };
+      form.addEventListener('submit', submit);
+      dlg.addEventListener('close', () => { form.removeEventListener('submit', submit); res(dlg.returnValue); }, { once: true });
+      dlg.returnValue = ''; dlg.showModal(); onShow?.();
+      const first = focus || [...$('formBody').querySelectorAll('input, select')].find(el => el.offsetParent !== null && (el.type !== 'radio' || el.checked));
+      if (first) { first.focus(); try { first.setSelectionRange(first.value.length, first.value.length); } catch { /* not a text box */ } }
+    });
+  }
+
   /* ---------- pricing engine (integer cents) ---------- */
-  /* Cart keys are barcodes. An item with no fixed price is keyed "barcode<TAB>cents": one line per price typed. */
+  /* Cart keys: "barcode"; "barcode<TAB>649" for a price typed in or read from a scale label (cents); and
+     "barcode<TAB>w1235" for an item weighed here (thousandths of its unit). Each price or weight is its own line. */
   const codeOf = key => key.split('\t')[0];
-  const typedCents = key => key.includes('\t') ? Number(key.split('\t')[1]) : null;
+  const tagOf = key => key.split('\t')[1] || '';
+  const typedCents = key => { const t = tagOf(key); return t && t[0] !== 'w' ? Number(t) : null; };
+  const weightOf = key => { const t = tagOf(key); return t[0] === 'w' ? Number(t.slice(1)) / 1000 : null; };
   const inCart = code => [...cart.keys()].some(key => codeOf(key) === code);
   function promoHits(promo, code, item) {
     const target = promo.applies_to;
@@ -753,8 +1121,9 @@ const Core = (() => {
     const live = Object.keys(promos).filter(k => promos[k].type !== 'clearance' && (coupons.has(k) || inCart(k)));
     const used = new Set(), lines = [];
     for (const [key, qty] of cart) {
-      const code = codeOf(key), typed = typedCents(key);
+      const code = codeOf(key), typed = typedCents(key), weight = weightOf(key);
       if (!has(inv, code)) continue;
+      const amount = each => weight === null ? each * qty : Math.round(each * weight) * qty;      // weighed: price per unit times weight
       const it = inv[code], orig = typed ?? toCents(it.price), sale = typed === null ? toCents(it.sale_price) : 0;
       let unit = orig, final = false; const why = [];
       if (sale > 0 && sale < unit) { unit = sale; why.push('Sale price'); }
@@ -772,7 +1141,7 @@ const Core = (() => {
         else continue;                                                                  // fixed on the whole order: below
         why.push(k); used.add(k);
       }
-      lines.push({ key, barcode: code, name: it.name, qty, orig, unit, total: unit * qty, taxable: !!it.taxable, final, why });
+      lines.push({ key, barcode: code, name: it.name, qty, orig, unit, total: amount(unit), off: amount(orig) - amount(unit), taxable: !!it.taxable, final, why, weight, wunit: weight === null ? '' : it.by_weight || 'lb' });
     }
     const sum = (rows, f) => rows.reduce((s, r) => s + f(r), 0);
     const open = lines.filter(l => !l.final), pool = sum(open, l => l.total);
@@ -783,10 +1152,10 @@ const Core = (() => {
     /* The order-level discount is shared between taxable and untaxed goods in proportion. */
     const taxableOff = pool ? Math.round(orderOff * sum(open.filter(l => l.taxable), l => l.total) / pool) : 0;
     const tax = Math.round((sum(lines.filter(l => l.taxable), l => l.total) - taxableOff) * (DB.settings.tax_rate_percent || 0) / 100);
-    return { lines, goods, orderOff, tax, total: goods - orderOff + tax, saved: sum(lines, l => (l.orig - l.unit) * l.qty) + orderOff, codes: [...used] };
+    return { lines, goods, orderOff, tax, total: goods - orderOff + tax, saved: sum(lines, l => l.off) + orderOff, codes: [...used] };
   }
   const asRecord = p => ({
-    items: p.lines.map(l => ({ barcode: l.barcode, name: l.name, qty: l.qty, price: toMoney(l.orig), unit_price: toMoney(l.unit), total: toMoney(l.total), taxable: l.taxable })),
+    items: p.lines.map(l => ({ barcode: l.barcode, name: l.name, qty: l.qty, price: toMoney(l.orig), unit_price: toMoney(l.unit), total: toMoney(l.total), taxable: l.taxable, ...(l.weight === null ? {} : { weight: l.weight, weight_unit: l.wunit }) })),
     promotions: p.codes, subtotal: toMoney(p.goods), discount: toMoney(p.orderOff), tax: toMoney(p.tax), total: toMoney(p.total), saved: toMoney(p.saved)
   });
 
@@ -809,8 +1178,8 @@ const Core = (() => {
       if (!rec.items.length) art.append(h('p', { class: 'r-note r-quiet', text: 'Scan an item to begin.' }));
       art.append(h('ul', {}, rec.items.map(it => h('li', {},
         h('span', { class: 'r-name', text: it.name }),
-        h('span', { class: 'r-qty', text: `${it.qty} x` }),
-        h('span', { class: 'r-each' }, it.unit_price < it.price ? h('s', { text: fmt(toCents(it.price)) }) : null, h('span', { text: fmt(toCents(it.unit_price)) })),
+        h('span', { class: 'r-qty', text: it.weight ? `${it.qty > 1 ? it.qty + ' x ' : ''}${it.weight.toFixed(3)} ${it.weight_unit} x` : `${it.qty} x` }),
+        h('span', { class: 'r-each' }, it.unit_price < it.price ? h('s', { text: fmt(toCents(it.price)) }) : null, h('span', { text: fmt(toCents(it.unit_price)) + (it.weight ? '/' + it.weight_unit : '') })),
         h('span', { class: 'r-amt', text: fmt(toCents(it.total)) })))), h('hr'));
       totals.append(line('Subtotal', fmt(toCents(rec.subtotal))));
       if (rec.discount > 0) totals.append(line('Coupons', fmt(-toCents(rec.discount))));
@@ -838,24 +1207,29 @@ const Core = (() => {
     return art;
   }
 
-  /* Zero-click printing: fill the hidden frame and print it the moment a payment is final. */
-  const PAGE_CSS = `
+  /* Zero-click printing: fill the hidden frame and print it the moment a payment is final. The page handed to the
+     printer is exactly the receipt, as wide as the paper roll and as long as the text, so a thermal printer gets no
+     blank half-page and a print preview shows nothing but the receipt. Text stays inside the roll's printable strip. */
+  const paperWidth = () => DEV.printer?.paper === 58 ? 58 : 80;
+  const pageCss = mm => `
     html, body { margin: 0; padding: 0; background: #fff; color: #000; }
-    body { width: 72mm; max-width: 100%; padding: 3mm 2mm 10mm; box-sizing: border-box; }
-    @media print { @page { margin: 0; } html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }`;
+    body { width: ${mm}mm; padding: 2mm 5mm 5mm; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .rcpt { font-size: ${mm === 58 ? 11 : 13}px; }
+    .rcpt .r-each s, .rcpt hr { color: #000; }`;
+  function printNode(node, title, mm = paperWidth()) {
+    const frame = window.frames['print_frame'], doc = frame.document;
+    doc.open();
+    doc.write(`<!doctype html><html><head><meta charset="utf-8"><title>${title}</title><style>${$('rcptCss').textContent}${pageCss(mm)}</style><style id="sheet"></style></head><body></body></html>`);
+    doc.close();
+    doc.body.append(doc.importNode(node, true));
+    const long = Math.ceil(doc.body.getBoundingClientRect().height * 25.4 / 96) + 1;
+    doc.getElementById('sheet').textContent = `@page { size: ${mm}mm ${long}mm; margin: 0; }`;
+    frame.focus();
+    frame.print();
+  }
   function printReceipt(rec) {
     if (!DB.settings.printing_enabled) return;
-    try {
-      const frame = window.frames['print_frame'], doc = frame.document;
-      doc.open();
-      doc.write(`<!doctype html><html><head><meta charset="utf-8"><title>Receipt ${rec.id}</title><style>${PAGE_CSS}${$('rcptCss').textContent}</style></head><body></body></html>`);
-      doc.close();
-      doc.body.append(doc.importNode(receiptNode(rec), true));
-      frame.focus();
-      frame.print();
-    } catch (e) {
-      toast('The receipt could not be sent to the printer.', 'bad');
-    }
+    try { printNode(receiptNode(rec), `Receipt ${rec.id}`); } catch { toast('The receipt could not be sent to the printer.', 'bad'); }
   }
 
   /* ---------- rendering ---------- */
@@ -872,16 +1246,17 @@ const Core = (() => {
       rows.replaceChildren(h('li', { class: 'empty', text: 'This register is not set up yet. The owner loads the catalogue.' }));
       couponRow.replaceChildren(); $('paper').replaceChildren();
       for (const id of ['payCash', 'payCard', 'payAcct']) $(id).disabled = true;
+      $('acctBtn').hidden = true;
       return;
     }
     const p = priceCart();
     rows.replaceChildren(...(p.lines.length ? p.lines.map(l => h('li', { class: 'row' + (l.key === flash ? ' is-new' : '') },
       h('div', { class: 'row-name' }, h('span', { text: l.name }), l.why.length ? h('small', { text: l.why.join(', ') }) : null),
-      h('div', { class: 'stepper' },
+      l.weight !== null ? h('div', { class: 'weighed', text: `${l.qty > 1 ? l.qty + ' \u00d7 ' : ''}${l.weight.toFixed(3)} ${l.wunit}` }) : h('div', { class: 'stepper' },
         h('button', { type: 'button', 'aria-label': `One fewer ${l.name}`, text: '\u2212', onclick: () => setQty(l.key, l.qty - 1) }),
         h('output', { text: l.qty }),
         h('button', { type: 'button', 'aria-label': `One more ${l.name}`, text: '+', onclick: () => setQty(l.key, l.qty + 1) })),
-      h('div', { class: 'price' }, l.unit < l.orig ? h('s', { text: fmt(l.orig) }) : null, h('span', { text: fmt(l.unit) })),
+      h('div', { class: 'price' }, l.unit < l.orig ? h('s', { text: fmt(l.orig) }) : null, h('span', { text: fmt(l.unit) + (l.weight === null ? '' : '/' + l.wunit) })),
       h('div', { class: 'row-total', text: fmt(l.total) }),
       h('button', { type: 'button', class: 'row-x', 'aria-label': `Remove ${l.name}`, text: '\u00d7', onclick: () => setQty(l.key, 0) })))
       : [h('li', { class: 'empty', text: lastSale ? 'Sale complete. Scan the next customer\u2019s first item.' : 'Scan an item to begin.' })]));
@@ -895,37 +1270,24 @@ const Core = (() => {
     $('tTax').textContent = fmt(p.tax); $('tTotal').textContent = fmt(p.total);
     $('tSaved').hidden = !p.saved; $('tSaved').textContent = `Saving ${fmt(p.saved)} on this sale`;
 
-    /* account strip and the frozen-account lock */
-    const c = customer && has(DB.customers, customer) ? DB.customers[customer] : null;
-    if (!c) customer = null;
-    const owed = c ? toCents(c.balance_due) : 0, frozen = !!c && isFrozen(c);
-    $('acctInfo').replaceChildren(...(c ? [h('div', { class: 'acct-card' },
-      h('strong', { text: c.name }), frozen ? h('span', { class: 'pill', text: 'Frozen' }) : null,
-      h('span', { class: 'owes', text: owed > 0 ? `Owes ${fmt(owed)}${c.due_date ? `, due ${c.due_date}` : ''}` : 'Nothing owed' }),
-      owed > 0 ? h('button', { type: 'button', class: 'btn small', text: 'Collect balance', onclick: collectBalance }) : null,
-      h('button', { type: 'button', class: 'btn small ghost', text: 'Remove customer', onclick: () => { customer = null; $('phone').value = ''; render(); } }))] : []));
-    $('lock').hidden = !frozen;
-    if (frozen) $('lockMsg').textContent = owed > 0
-      ? `${c.name}\u2019s account is frozen with ${fmt(owed)} owing${c.due_date ? `, due ${c.due_date}` : ''}. Collect the balance to continue this sale.`
-      : `${c.name}\u2019s account was frozen by the owner. Remove the customer to sell without the account.`;
-
-    const canPay = p.lines.length > 0 && !busy && !frozen;
+    const canPay = p.lines.length > 0 && !busy;
     $('payCash').disabled = $('payCard').disabled = $('payAcct').disabled = !canPay;
     $('payAcct').hidden = !DB.settings.credit_allowed_globally;
+    $('acctBtn').hidden = !(DB.settings.credit_allowed_globally || Object.keys(DB.customers).length);
+    $('manualToggle').hidden = DEV.card?.kind === 'manual';
     $('manualToggle').setAttribute('aria-checked', String(manualCard));
-    const map = LS.get(K_DEVICE), prof = map && has(DB.payment_devices.profiles, map.profile_id) ? DB.payment_devices.profiles[map.profile_id] : null;
-    $('cardHint').textContent = manualCard ? 'Amount keyed on the standalone device' : prof ? `Pushes to ${prof.label}` : 'Asks for the device on first use';
+    $('cardHint').textContent = Hw.cardHint();
 
     $('paper').replaceChildren(lastSale && !p.lines.length ? receiptNode(lastSale) : receiptNode(asRecord(p), true));
   }
 
   /* ---------- scanning ---------- */
-  const scan = $('scan'), phone = $('phone');
+  const scan = $('scan');
   function addToCart(key, it) {
     lastSale = null;
     cart.set(key, (cart.get(key) || 0) + 1); flash = key; beep(true);
-    const units = [...cart].reduce((n, [k, q]) => n + (codeOf(k) === codeOf(key) ? q : 0), 0);
-    if (it.stock !== null && it.stock < units) toast(`${it.name}: the stock count shows ${Math.max(0, it.stock)} left.`);
+    const units = [...cart].reduce((n, [k, q]) => n + (codeOf(k) === codeOf(key) ? q * (weightOf(k) ?? 1) : 0), 0);
+    if (it.stock !== null && it.stock < units) toast(`${it.name}: the stock count shows ${Math.max(0, it.stock)}${it.by_weight ? ' ' + it.by_weight : ''} left.`);
   }
   async function askPrice(code, it) {
     beep(true);
@@ -940,24 +1302,46 @@ const Core = (() => {
     if (!(cents > 0) || cents > 1000000) return toast('Type a price above zero.', 'bad');
     addToCart(`${code}\t${cents}`, it); render();
   }
+  /* A label from a deli or meat scale carries the item number and the price. Finds the item it belongs to. */
+  function labelItem(code) {
+    const label = Devices.embeddedPrice(code);
+    if (!label || !(label.cents > 0)) return null;
+    const short = String(Number(label.item));
+    const key = Object.keys(DB.inventory).find(k => {
+      if (k === label.item || k === short || k === '2' + label.item) return true;
+      const upc = /^0\d{12}$/.test(k) ? k.slice(1) : k;                                   // the item saved under its label barcode with the price as zeros
+      return /^2\d{11}$/.test(upc) && upc.slice(1, 6) === label.item && upc.slice(7, 11) === '0000';
+    });
+    return key ? { key, cents: label.cents } : null;
+  }
   function handleScan(code) {
     if (!code || busy) return;
     if (!DB) { beep(false); return toast('This register is not set up yet.', 'bad'); }
     const promoKey = has(DB.promotions, code) ? code : Object.keys(DB.promotions).find(k => k.toLowerCase() === code.toLowerCase());
-    if (has(DB.inventory, code)) {
+    const found = Devices.scanVariants(code).find(c => has(DB.inventory, c)), label = found || promoKey ? null : labelItem(code);
+    if (found) {
       lastSale = null;
-      const it = DB.inventory[code];
-      if (it.price === null) { render(); return void askPrice(code, it); }      // no fixed price: the cashier types it
-      addToCart(code, it);
+      const it = DB.inventory[found];
+      if (it.price === null) { render(); return void askPrice(found, it); }      // no fixed price: the cashier types it
+      if (it.by_weight) { render(); beep(true); return void weighItem(found, it); }   // sold by weight: read the scale
+      addToCart(found, it);
     } else if (promoKey) {
       beep(true);
       if (DB.promotions[promoKey].type === 'clearance') toast('Clearance prices apply on their own. No code needed.');
       else if (coupons.has(promoKey)) toast(`${promoKey} is already on this sale.`);
       else { coupons.add(promoKey); toast(`Coupon ${promoKey} added.`, 'good'); }
+    } else if (label) {
+      addToCart(`${label.key}\t${label.cents}`, DB.inventory[label.key]);            // priced by the scale that printed the label
     } else {
       beep(false); toast(`Nothing on file for \u201c${code}\u201d.`, 'bad');
     }
     render();
+  }
+  /* A scan arriving from a scanner on a serial port. */
+  function serialScan(code) {
+    if (busy || modalOpen()) return beep(false);
+    $('scanEcho').textContent = '';
+    handleScan(code);
   }
   const takeScan = () => { const code = scan.value.trim(); scan.value = ''; $('scanEcho').textContent = ''; handleScan(code); };
   scan.addEventListener('input', () => { $('scanEcho').textContent = scan.value; });
@@ -966,7 +1350,7 @@ const Core = (() => {
     else if (e.key === 'Escape') { scan.value = ''; $('scanEcho').textContent = ''; }
   });
 
-  /* Keep the keyboard on the scanner box unless a dialog or the phone field has it. */
+  /* Keep the keyboard on the scanner box unless a dialog has it. */
   function refocus() {
     const a = document.activeElement;
     if (!modalOpen() && !a?.hasAttribute?.('data-keepfocus')) {
@@ -977,10 +1361,10 @@ const Core = (() => {
     }
     const ready = document.activeElement === scan && document.hasFocus();
     document.body.classList.toggle('scan-ready', ready);
-    $('scanState').textContent = ready ? 'Ready to scan' : document.activeElement === phone ? 'Typing a phone number. Press Enter when done.' : modalOpen() ? 'Finish the open step first' : 'Click this window to scan';
+    $('scanState').textContent = ready ? 'Ready to scan' : modalOpen() ? 'Finish the open step first' : 'Click this window to scan';
   }
   for (const ev of ['focusin', 'focusout', 'pointerup']) document.addEventListener(ev, () => setTimeout(refocus, 0));
-  document.addEventListener('close', () => { if (document.activeElement === phone) phone.blur(); setTimeout(refocus, 0); }, true);
+  document.addEventListener('close', () => setTimeout(refocus, 0), true);
   window.addEventListener('focus', refocus); window.addEventListener('blur', () => setTimeout(refocus, 0));
   setInterval(refocus, 2000);
   /* Safety net: a key that lands anywhere else (a button that was just clicked, the page body) still goes to the
@@ -990,23 +1374,6 @@ const Core = (() => {
     if (e.key.length === 1) { e.preventDefault(); scan.focus({ preventScroll: true }); scan.value += e.key; $('scanEcho').textContent = scan.value; }
     else if (e.key === 'Enter') { e.preventDefault(); scan.focus({ preventScroll: true }); takeScan(); }
   }, true);
-
-  /* ---------- customer account ---------- */
-  let phoneIdle;
-  async function attach(raw) {
-    const key = phoneKey(raw);
-    if (!key) { customer = null; return render(); }
-    if (!DB || !has(DB.customers, key)) { customer = null; beep(false); toast(`No account for ${raw.trim()}. The owner adds accounts.`, 'bad'); return render(); }
-    customer = key; phone.value = key;
-    if (needsFreeze(DB)) { try { DB = await Store.update(freezeOverdue); } catch { /* shown as frozen from the dates either way */ } }
-    render();
-  }
-  phone.addEventListener('keydown', e => {
-    if (e.key === 'Enter') { e.preventDefault(); attach(phone.value); phone.blur(); }
-    else if (e.key === 'Escape') { phone.value = customer || ''; phone.blur(); }
-  });
-  phone.addEventListener('focus', () => phone.select());   // typing replaces whatever number was there
-  phone.addEventListener('input', () => { clearTimeout(phoneIdle); phoneIdle = setTimeout(() => phone.blur(), 15000); });
 
   /* ---------- tender: cash ---------- */
   function cashDialog(due) {
@@ -1067,26 +1434,25 @@ const Core = (() => {
       ws.onclose = () => end(reject, new Error('The card device closed the connection before answering.'));
     });
   }
-  async function pushSerial(endpoint, body, signal) {
-    if (!('serial' in navigator)) throw new Error('This browser cannot use serial ports. Use Chrome or Edge, or key the amount on the device.');
-    const [port] = await navigator.serial.getPorts();
-    if (!port) throw new Error('No serial port is authorised on this register yet.');
-    await port.open({ baudRate: Number((/@(\d+)/.exec(endpoint) || [])[1]) || 9600 });
-    let reader;
+  async function pushSerial(target, body, signal) {
+    if (!Devices.serialOk()) throw new Error('This browser cannot use serial ports. Use Chrome or Edge, or key the amount on the terminal.');
+    const port = (await Devices.findPort(target.port)) || (target.port ? null : (await navigator.serial.getPorts())[0]);
+    if (!port) throw new Error('The serial card device set up on this register is not connected.');
+    let reply = '', done = null;
+    const answered = new Promise(res => { done = res; });
+    const link = await Devices.openSerial(port, target.line || { baud: Number((/@(\d+)/.exec(target.endpoint) || [])[1]) || 9600 }, bytes => {
+      reply += bytes.map(b => String.fromCharCode(b)).join('');
+      for (let nl; (nl = reply.indexOf('\n')) >= 0;) { const v = verdict(reply.slice(0, nl)); reply = reply.slice(nl + 1); if (v) done(v); }
+    }, () => done(null));
+    const onAbort = () => done(undefined);
+    signal.addEventListener('abort', onAbort);
     try {
-      const writer = port.writable.getWriter();
-      await writer.write(new TextEncoder().encode(JSON.stringify(body) + '\n')); writer.releaseLock();
-      reader = port.readable.getReader();
-      signal.addEventListener('abort', () => reader.cancel().catch(() => {}), { once: true });
-      const dec = new TextDecoder(); let buf = '';
-      for (;;) {
-        const { value, done } = await reader.read();
-        if (done) break;
-        buf += dec.decode(value, { stream: true });
-        for (let nl; (nl = buf.indexOf('\n')) >= 0;) { const v = verdict(buf.slice(0, nl)); buf = buf.slice(nl + 1); if (v) return v; }
-      }
-      throw signal.aborted ? aborted() : new Error('The serial card device stopped answering.');
-    } finally { try { reader?.releaseLock(); } catch { /* released */ } try { await port.close(); } catch { /* closed */ } }
+      await link.write([...new TextEncoder().encode(JSON.stringify(body) + '\n')]);
+      const v = await answered;
+      if (v === undefined) throw aborted();
+      if (v === null) throw new Error('The serial card device stopped answering.');
+      return v;
+    } finally { signal.removeEventListener('abort', onAbort); await link.close(); }
   }
   const simulate = (endpoint, signal) => new Promise((resolve, reject) => {
     const t = setTimeout(() => resolve(/decline/i.test(endpoint) ? { approved: false, message: 'The simulator declined the card.' } : { approved: true, reference: 'SIM' + String(Date.now()).slice(-6) }), 2200);
@@ -1094,10 +1460,10 @@ const Core = (() => {
   });
 
   /* Pushes the exact amount to the device and holds the "waiting" screen until it answers. */
-  async function pushToDevice(profile, endpoint, cents, ref) {
-    const dlg = $('waitDlg'), ctl = new AbortController(), sim = /^sim:\/\//i.test(endpoint);
+  async function pushToDevice(target, cents, ref) {
+    const dlg = $('waitDlg'), ctl = new AbortController(), endpoint = target.endpoint, sim = /^sim:\/\//i.test(endpoint);
     const body = { type: 'sale', amount: (cents / 100).toFixed(2), amount_cents: cents, currency: 'USD', reference: ref, station };
-    $('waitAmt').textContent = fmt(cents); $('waitDev').textContent = `Sent to ${profile.label}. Ask the customer to pay on the card device.`; $('waitSim').hidden = !sim;
+    $('waitAmt').textContent = fmt(cents); $('waitDev').textContent = `Sent to ${target.label}. Ask the customer to pay on the card terminal.`; $('waitSim').hidden = !sim;
     let why = '';
     const cancel = () => { why = 'cancel'; ctl.abort(); }, block = e => e.preventDefault();
     const timer = setTimeout(() => { why = 'timeout'; ctl.abort(); }, HARDWARE_TIMEOUT_MS);
@@ -1105,7 +1471,7 @@ const Core = (() => {
     dlg.showModal();
     try {
       if (sim) return { ...await simulate(endpoint, ctl.signal), test: true };
-      if (profile.connection_type === 'SERIAL_COM') return await pushSerial(endpoint, body, ctl.signal);
+      if (target.serial) return await pushSerial(target, body, ctl.signal);
       if (/^wss?:\/\//i.test(endpoint)) return await pushSocket(endpoint, body, ctl.signal);
       return await pushHttp(/^https?:\/\//i.test(endpoint) ? endpoint : 'http://' + endpoint, body, ctl.signal);
     } catch (e) {
@@ -1118,64 +1484,31 @@ const Core = (() => {
     }
   }
 
-  /* One-time station mapping: which profile and address this computer pushes to. Cached in localStorage. */
-  function mapDialog() {
-    const dlg = $('mapDlg'), form = dlg.querySelector('form'), list = $('mapList'), endpoint = $('mapEndpoint');
-    const profiles = DB.payment_devices.profiles, saved = LS.get(K_DEVICE);
-    const first = saved && has(profiles, saved.profile_id) ? saved.profile_id : has(profiles, DB.payment_devices.ACTIVE_PROFILE_ID) ? DB.payment_devices.ACTIVE_PROFILE_ID : Object.keys(profiles)[0];
-    const chosen = () => form.elements.mapPick.value;
-    const serialState = async () => { $('mapSerialState').textContent = 'serial' in navigator ? ((await navigator.serial.getPorts()).length ? 'A port is authorised.' : 'No port authorised yet.') : 'This browser cannot use serial ports.'; };
-    const sync = () => {
-      const p = profiles[chosen()];
-      endpoint.value = saved && saved.profile_id === chosen() && saved.endpoint ? saved.endpoint : p.endpoint_address;
-      $('mapSerial').hidden = p.connection_type !== 'SERIAL_COM'; $('mapErr').textContent = '';
-      if (p.connection_type === 'SERIAL_COM') serialState();
-    };
-    list.replaceChildren(...Object.entries(profiles).map(([id, p]) => h('label', { class: 'map-opt' },
-      h('input', { type: 'radio', name: 'mapPick', value: id, checked: id === first, onchange: sync }),
-      h('strong', { text: p.label + (id === DB.payment_devices.ACTIVE_PROFILE_ID ? ' (store default)' : '') }),
-      h('span', { text: `${p.provider_name || 'Card device'}, ${p.connection_type === 'SERIAL_COM' ? 'serial port' : 'local network'}, ${p.endpoint_address || 'no address set'}` }))));
-    sync();
-    $('mapGrant').onclick = async () => { try { await navigator.serial.requestPort(); } catch { /* picker dismissed */ } serialState(); };
-    return new Promise(res => {
-      let out = null;
-      const submit = async e => {
-        e.preventDefault();
-        const id = chosen(), p = profiles[id], addr = endpoint.value.trim();
-        if (!addr) return void ($('mapErr').textContent = 'Enter the device address.');
-        if (p.connection_type === 'SERIAL_COM' && !('serial' in navigator && (await navigator.serial.getPorts()).length)) return void ($('mapErr').textContent = 'Choose the serial port this device is plugged into.');
-        out = { profile_id: id, endpoint: addr === p.endpoint_address ? '' : addr };
-        LS.set(K_DEVICE, out); dlg.close('ok');
-      };
-      form.addEventListener('submit', submit);
-      dlg.addEventListener('close', () => { form.removeEventListener('submit', submit); res(out); }, { once: true });
-      dlg.showModal();
-    });
-  }
-
   async function manualCapture(cents) {
     const ok = await ask({
       title: 'Manual Standalone Card Device Capture',
-      body: [h('p', { class: 'big', text: fmt(cents) }), 'Key this amount into the card device. Continue only after the device shows the payment as approved.'],
+      body: [h('p', { class: 'big', text: fmt(cents) }), 'Key this amount into the card terminal. Continue only after the terminal shows the payment as approved.'],
       buttons: [{ label: 'Cancel', cancel: true }, { label: 'Approved on device', value: 'yes', kind: 'primary' }]
     });
     return ok === 'yes' ? { method: 'card_manual' } : null;
   }
+  /* The first card payment on a register asks which terminal it has, and so does a payment after that terminal's
+     setup has gone (the owner removed it, or it was never finished). The answer is kept on this register. */
   async function cardExternal(cents, ref) {
     for (;;) {
-      const profiles = DB.payment_devices.profiles;
-      if (!Object.keys(profiles).length) {
-        const pick = await ask({ title: 'No card device is linked', body: 'The owner has not added a card device to this register\u2019s database.', buttons: [{ label: 'Cancel', cancel: true }, { label: 'Manual Standalone Card Device Capture', value: 'manual', kind: 'primary' }] });
-        return pick === 'manual' ? manualCapture(cents) : null;
+      if (!DEV.card || (DEV.card.kind === 'profile' && !profileOf(DEV.card))) {
+        const lead = DEV.card ? 'The card terminal this register used is no longer in the owner\u2019s list. Set it up again.' : 'This is the first card payment on this register. Tell it which card terminal it has.';
+        if (!(await Hw.setupCard(lead))) return null;
       }
-      let map = LS.get(K_DEVICE);
-      if (!map || !has(profiles, map.profile_id)) { map = await mapDialog(); if (!map) return null; render(); }
-      const profile = profiles[map.profile_id];
-      const v = await pushToDevice(profile, map.endpoint || profile.endpoint_address, cents, ref);
-      if (v.approved) return { method: 'card_external', profile_id: map.profile_id, provider: profile.provider_name || profile.label, reference: v.reference || '', ...(v.test ? { test: true } : {}) };
-      if (v.cancelled) { toast('Card payment cancelled. Check the card device did not take the card.'); return null; }
-      const next = await ask({ title: 'The card payment did not go through', body: v.message, buttons: [{ label: 'Cancel payment', cancel: true }, { label: 'Manual Standalone Card Device Capture', value: 'manual' }, { label: 'Send again', value: 'retry', kind: 'primary' }] });
+      if (DEV.card.kind === 'manual') return manualCapture(cents);
+      const target = cardTarget(DEV.card);
+      const v = await pushToDevice(target, cents, ref);
+      if (v.approved) return { method: 'card_external', ...(target.profile_id ? { profile_id: target.profile_id } : {}), provider: target.provider, reference: v.reference || '', ...(v.test ? { test: true } : {}) };
+      if (v.cancelled) { toast('Card payment cancelled. Check the card terminal did not take the card.'); return null; }
+      Hw.check();
+      const next = await ask({ title: 'The card payment did not go through', body: v.message, buttons: [{ label: 'Cancel payment', cancel: true }, { label: 'Set up the terminal again', value: 'setup' }, { label: 'Manual Standalone Card Device Capture', value: 'manual' }, { label: 'Send again', value: 'retry', kind: 'primary' }] });
       if (next === 'manual') return manualCapture(cents);
+      if (next === 'setup') { await Hw.setupCard(); continue; }
       if (next !== 'retry') return null;
     }
   }
@@ -1189,39 +1522,30 @@ const Core = (() => {
     if (busy || !DB || modalOpen()) return;
     const p = priceCart();
     if (!p.lines.length) return;
-    const c = customer && has(DB.customers, customer) ? DB.customers[customer] : null;
-    if (c && isFrozen(c)) return;
-    if (method === 'account') {
-      if (!DB.settings.credit_allowed_globally) return;
-      if (!c) { toast('Type the customer\u2019s phone number first, then Charge to Account.', 'bad'); phone.focus(); return; }
-    }
+    if (method === 'account' && !DB.settings.credit_allowed_globally) return;
     busy = true; render();
     try {
       const id = newId();
-      let payment;
-      if (method === 'account') {
-        const owed = toCents(c.balance_due);
-        const due = owed > 0 && c.due_date ? c.due_date : addDays(isoDate(), DB.settings.global_credit_duration_days);
-        const ok = await ask({ title: `Charge ${fmt(p.total)} to ${c.name}?`, body: `Their balance becomes ${fmt(owed + p.total)}, to be paid by ${due}.`, buttons: [{ label: 'Cancel', cancel: true }, { label: 'Charge to Account', value: 'yes', kind: 'primary' }] });
-        payment = ok === 'yes' ? { method: 'account' } : null;
-      } else if (p.total === 0) payment = { method: 'cash', tendered: 0, change: 0 };   // nothing to collect
+      let payment, acct = null;
+      if (method === 'account') { acct = await chargeTo(p.total); payment = acct ? { method: 'account' } : null; }      // the account is asked for only now
+      else if (p.total === 0) payment = { method: 'cash', tendered: 0, change: 0 };   // nothing to collect
       else payment = await tender(method, p.total, id);
       if (!payment) return;
 
-      const sale = { id, ts: new Date().toISOString(), type: 'sale', station, ...asRecord(p), payment, customer, customer_name: c?.name || '' };
+      const sale = { id, ts: new Date().toISOString(), type: 'sale', station, ...asRecord(p), payment, customer: acct, customer_name: acct ? DB.customers[acct].name : '' };
       try {
         DB = await Store.update(core => {
-          const acct = payment.method !== 'account' ? undefined : has(core.customers, customer) ? core.customers[customer] : null;
-          if (acct === null || (acct && isFrozen(acct))) throw new Error('this account can no longer be charged');
+          const a = !acct ? undefined : has(core.customers, acct) ? core.customers[acct] : null;
+          if (a === null || (a && isFrozen(a))) throw new Error('this account can no longer be charged');
           Core.applyRecord(core, sale);
-          if (acct) sale.account = { balance_after: acct.balance_due, due_date: acct.due_date };
+          if (a) sale.account = { balance_after: a.balance_due, due_date: a.due_date };
           Net.track(core, sale.id);
         }, [sale]);
       } catch (e) {
         if (payment.method === 'account') { toast(`Not charged: ${e.message}.`, 'bad'); return; }
         await saveFailed(`Sale ${id} for ${fmt(p.total)}`, e); return;
       }
-      cart.clear(); coupons.clear(); customer = null; phone.value = ''; lastSale = sale;
+      cart.clear(); coupons.clear(); lastSale = sale;
       Net.push();
       busy = false; render();
       printReceipt(sale);
@@ -1230,34 +1554,130 @@ const Core = (() => {
     } finally { busy = false; render(); }
   }
 
-  async function collectBalance() {
-    if (busy || !DB || !customer || !has(DB.customers, customer)) return;
-    const c = DB.customers[customer], owed = toCents(c.balance_due);
-    if (owed <= 0) return;
+  /* ---------- customer accounts: asked for only when someone pays on account ---------- */
+  const NAME_FIELDS = ['name', 'first_name', 'last_name'];
+  const detailLines = c => DB.settings.account_fields.filter(f => f.use !== 'off' && c.fields[f.id] && !NAME_FIELDS.includes(f.id)).map(f => `${f.label}: ${c.fields[f.id]}`);
+  const owesWords = c => { const owed = toCents(c.balance_due); return owed > 0 ? `Owes ${fmt(owed)}${c.due_date ? `, due ${c.due_date}` : ''}.` : 'Nothing owed.'; };
+
+  /* A register can open an account with whatever the owner chose to ask for. It reaches the host like a sale does. */
+  async function openAccount(number) {
+    const asked = DB.settings.account_fields.filter(f => f.use !== 'off');
+    const no = h('input', { id: 'naNo', type: 'tel', inputmode: 'numeric', autocomplete: 'off', maxlength: '20', value: number || DB.settings.account_prefix });
+    const inputs = asked.map(f => [f, h('input', { id: 'na_' + f.id, autocomplete: 'off', maxlength: '200' })]);
+    let key = null;
+    const done = await formDialog({
+      title: 'Open a new account', ok: 'Open account', focus: number ? inputs[0]?.[1] : no,
+      body: [h('label', { for: 'naNo', text: 'Account number (the phone number)' }), no,
+        ...inputs.flatMap(([f, el]) => [h('label', { for: el.id, text: f.label + (f.use === 'required' ? '' : ' (optional)') }), el])],
+      onOk: async () => {
+        const k = phoneKey(no.value);
+        if (k.length < 4 || k.length > 15) return 'Type the phone number: 4 to 15 digits.';
+        if (has(DB.customers, k)) return `Account ${k} already exists.`;
+        const gap = inputs.find(([f, el]) => f.use === 'required' && !el.value.trim());
+        if (gap) { gap[1].focus(); return `Type the ${gap[0].label.toLowerCase()}.`; }
+        const fields = Core.cleanFields(Object.fromEntries(inputs.map(([f, el]) => [f.id, el.value])));
+        const rec = { id: newId(), ts: new Date().toISOString(), type: 'account_open', station, total: 0, customer: k, customer_name: Core.accountName(k, fields), fields };
+        DB = await Store.update(core => {
+          if (has(core.customers, k)) throw new Error(`Account ${k} already exists.`);
+          Core.applyRecord(core, rec); Net.track(core, rec.id);
+        }, [rec]);
+        Net.push(); key = k;
+      }
+    });
+    if (done !== 'ok') return null;
+    const name = DB.customers[key].name;
+    toast(name === `Account ${key}` ? `Account ${key} opened.` : `Account ${key} opened for ${name}.`, 'good');
+    return key;
+  }
+
+  /* Asks for the account number, with the owner's starting digits already typed. Resolves with the account, or null. */
+  async function findAccount(title, lead) {
+    const canOpen = DB.settings.registers_open_accounts;
+    for (;;) {
+      const no = h('input', { id: 'acctNo', type: 'tel', inputmode: 'numeric', autocomplete: 'off', maxlength: '20', value: DB.settings.account_prefix });
+      const typed = () => { const k = phoneKey(no.value); return k.length > DB.settings.account_prefix.length ? k : ''; };
+      const step = await formDialog({
+        title, ok: 'Find account', focus: no, extra: canOpen ? [{ label: 'Open a new account', value: 'new' }] : [],
+        body: [lead, h('label', { for: 'acctNo', text: 'Account number (the phone number)' }), no],
+        onOk: () => phoneKey(no.value).length < 4 ? 'Type the account number: the customer’s phone number.' : null
+      });
+      if (!step) return null;
+      const key = phoneKey(no.value), start = DB.settings.account_prefix;
+      if (step === 'ok' && has(DB.customers, key)) return key;
+      /* The same account typed with or without the owner's starting digits (accounts opened before they were set). */
+      const other = start && key.startsWith(start) ? key.slice(start.length) : start + key;
+      if (step === 'ok' && start && other.length >= 4 && has(DB.customers, other)) return other;
+      let next = step;
+      if (step === 'ok') next = await ask({
+        title: `No account ${key}`, body: canOpen ? 'There is no account with this number. Check the number, or open an account now.' : 'There is no account with this number. Accounts are opened by the owner.',
+        buttons: [{ label: 'Cancel', cancel: true }, { label: 'Try another number', value: 'again' }, ...(canOpen ? [{ label: 'Open a new account', value: 'new', kind: 'primary' }] : [])]
+      });
+      if (!next) return null;
+      if (next === 'new') { const opened = await openAccount(step === 'ok' ? key : typed()); if (opened) return opened; }
+    }
+  }
+
+  /* Takes money against a balance. The caller holds the busy flag. */
+  async function takeAccountPayment(key) {
+    const c = DB.customers[key], owed = toCents(c.balance_due);
+    if (owed <= 0) return false;
+    const input = h('input', { id: 'acctAmt', inputmode: 'decimal', autocomplete: 'off', value: (owed / 100).toFixed(2) });
+    const how = await ask({ title: `Collect balance from ${c.name}`, body: [`${fmt(owed)} is owing${c.due_date ? `, due ${c.due_date}` : ''}.`, h('label', { for: 'acctAmt', text: 'Amount to collect now' }), input], buttons: [{ label: 'Cancel', cancel: true }, { label: 'Cash', value: 'cash', kind: 'primary' }, { label: 'Card / External Device', value: 'card' }] });
+    if (!how) return false;
+    const amt = toCents(input.value);
+    if (!(amt > 0) || amt > owed) { toast(`Enter an amount from $0.01 to ${fmt(owed)}.`, 'bad'); return false; }
+    const id = newId(), payment = await tender(how, amt, id);
+    if (!payment) return false;
+    const rec = { id, ts: new Date().toISOString(), type: 'account_payment', station, total: toMoney(amt), payment, customer: key, customer_name: c.name };
+    try {
+      DB = await Store.update(core => {
+        const a = has(core.customers, key) ? core.customers[key] : null;
+        if (!a) throw new Error('this account no longer exists');
+        Core.applyRecord(core, rec);
+        rec.account = { balance_after: a.balance_due, due_date: a.due_date };
+        Net.track(core, rec.id);
+      }, [rec]);
+    } catch (e) { await saveFailed(`Payment ${id} of ${fmt(amt)} from ${c.name}`, e); return false; }
+    if (!cart.size) lastSale = rec;
+    Net.push(); render();
+    printReceipt(rec);
+    toast(`Collected ${fmt(amt)} from ${c.name}.`, 'good');
+    return true;
+  }
+
+  /* "Charge to Account": find or open the account, clear a frozen one, confirm. Resolves with the account, or null. */
+  async function chargeTo(total) {
+    const key = await findAccount(`Charge ${fmt(total)} to an account`, 'Type the customer’s account number.');
+    if (!key) return null;
+    for (;;) {
+      if (needsFreeze(DB)) { try { DB = await Store.update(freezeOverdue); } catch { /* the dates still mark it frozen */ } }
+      const c = has(DB.customers, key) ? DB.customers[key] : null;
+      if (!c) return null;
+      const owed = toCents(c.balance_due);
+      if (isFrozen(c)) {
+        if (owed <= 0) { await ask({ title: `${c.name}’s account is frozen`, body: 'The owner has frozen this account. Take cash or card for this sale.', buttons: [{ label: 'Close', cancel: true }] }); return null; }
+        const pick = await ask({ title: `${c.name}’s account is frozen`, body: `${fmt(owed)} is owing${c.due_date ? ` and was due ${c.due_date}` : ''}. Nothing more can go on this account until the balance is paid.`, buttons: [{ label: 'Cancel', cancel: true }, { label: 'Collect balance', value: 'collect', kind: 'primary' }] });
+        if (pick !== 'collect' || !(await takeAccountPayment(key))) return null;
+        continue;
+      }
+      const due = owed > 0 && c.due_date ? c.due_date : addDays(isoDate(), DB.settings.global_credit_duration_days);
+      const ok = await ask({ title: `Charge ${fmt(total)} to ${c.name}?`, body: [...detailLines(c), `Account ${key}. ${owesWords(c)}`, `The balance becomes ${fmt(owed + total)}, to be paid by ${due}.`], buttons: [{ label: 'Cancel', cancel: true }, { label: 'Charge to Account', value: 'yes', kind: 'primary' }] });
+      return ok === 'yes' ? key : null;
+    }
+  }
+
+  /* The Accounts button: look an account up, see what is owed, take a payment, or open a new one. */
+  async function accountsDesk() {
+    if (busy || !DB || modalOpen()) return;
     busy = true; render();
     try {
-      const input = h('input', { id: 'acctAmt', inputmode: 'decimal', autocomplete: 'off', value: (owed / 100).toFixed(2) });
-      const how = await ask({ title: `Collect balance from ${c.name}`, body: [`${fmt(owed)} is owing${c.due_date ? `, due ${c.due_date}` : ''}.`, h('label', { for: 'acctAmt', text: 'Amount to collect now' }), input], buttons: [{ label: 'Cancel', cancel: true }, { label: 'Cash', value: 'cash', kind: 'primary' }, { label: 'Card / External Device', value: 'card' }] });
-      if (!how) return;
-      const amt = toCents(input.value);
-      if (!(amt > 0) || amt > owed) { toast(`Enter an amount from $0.01 to ${fmt(owed)}.`, 'bad'); return; }
-      const id = newId(), payment = await tender(how, amt, id);
-      if (!payment) return;
-      const rec = { id, ts: new Date().toISOString(), type: 'account_payment', station, total: toMoney(amt), payment, customer, customer_name: c.name };
-      try {
-        DB = await Store.update(core => {
-          const acct = has(core.customers, customer) ? core.customers[customer] : null;
-          if (!acct) throw new Error('this account no longer exists');
-          Core.applyRecord(core, rec);
-          rec.account = { balance_after: acct.balance_due, due_date: acct.due_date };
-          Net.track(core, rec.id);
-        }, [rec]);
-      } catch (e) { await saveFailed(`Payment ${id} of ${fmt(amt)} from ${c.name}`, e); return; }
-      if (!cart.size) lastSale = rec;
-      Net.push();
-      busy = false; render();
-      printReceipt(rec);
-      toast(`Collected ${fmt(amt)} from ${c.name}.`, 'good');
+      const key = await findAccount('Customer accounts', 'Type an account number to see what is owed or to take a payment.');
+      for (; key && has(DB.customers, key);) {
+        const c = DB.customers[key], owed = toCents(c.balance_due);
+        const pick = await ask({ title: c.name, body: [`Account ${key}`, ...detailLines(c), owesWords(c) + (isFrozen(c) ? ' This account is frozen.' : '')], buttons: [{ label: 'Close', cancel: true }, ...(owed > 0 ? [{ label: 'Collect balance', value: 'collect', kind: 'primary' }] : [])] });
+        if (pick !== 'collect') break;
+        await takeAccountPayment(key);
+      }
     } finally { busy = false; render(); }
   }
 
@@ -1265,12 +1685,15 @@ const Core = (() => {
   $('payCard').addEventListener('click', () => checkout('card'));
   $('payAcct').addEventListener('click', () => checkout('account'));
   $('manualToggle').addEventListener('click', () => { manualCard = !manualCard; LS.set(K_MANUAL, manualCard); render(); });
+  $('acctBtn').addEventListener('click', accountsDesk);
+  $('devBtn').addEventListener('click', () => Hw.open());
 
   /* ---------- stealth file sync: drop inventory_db.json anywhere on the screen ---------- */
   const pruneCart = () => {
     for (const key of [...cart.keys()]) {
-      const it = has(DB.inventory, codeOf(key)) ? DB.inventory[codeOf(key)] : null;
-      if (!it || (it.price === null) !== (typedCents(key) !== null)) cart.delete(key);      // gone, or its pricing changed
+      const it = has(DB.inventory, codeOf(key)) ? DB.inventory[codeOf(key)] : null, plain = !tagOf(key);
+      /* Gone, or it changed kind under the cart: a plain line for an item that now needs a price or a weight, or a weighed line for an item no longer sold by weight. */
+      if (!it || (plain && (it.price === null || it.by_weight)) || (weightOf(key) !== null && !it.by_weight)) cart.delete(key);
     }
     for (const k of [...coupons]) if (!has(DB.promotions, k)) coupons.delete(k);
   };
@@ -1314,15 +1737,12 @@ const Core = (() => {
       if (DB?.settings.pin_hash && !(await askPin('Enter the owner PIN to change this register\u2019s host', DB.settings.pin_hash))) return;
       return void Net.choose();
     }
+    if (kind === 'device') return void Hw.open();
     if (!DB?.settings.pin_hash || busy || modalOpen()) return;
     if (kind === 'export') {
       if (!(await askPin('Enter the owner PIN to export this register', DB.settings.pin_hash))) return;
       download(compile(DB, await Store.allSales()), 'inventory_db.json');
       toast('Exported inventory_db.json.', 'good');
-    } else {
-      if (!Object.keys(DB.payment_devices.profiles).length) return toast('No card devices are in this register\u2019s database.', 'bad');
-      if (!(await askPin('Enter the owner PIN to change this register\u2019s card device', DB.settings.pin_hash))) return;
-      if (await mapDialog()) { toast('Card device saved for this register.', 'good'); render(); }
     }
   }
   window.addEventListener('keydown', e => {
@@ -1331,6 +1751,367 @@ const Core = (() => {
     else if (e.altKey && e.shiftKey && e.code === 'KeyH') { e.preventDefault(); ownerAction('host'); }
     else if (['F2', 'F3', 'F4'].includes(e.key) && !e.altKey && !e.ctrlKey) { e.preventDefault(); if (!modalOpen()) checkout({ F2: 'cash', F3: 'card', F4: 'account' }[e.key]); }
   });
+
+  /* ---------- this register's own devices ----------
+     Every register sets up its own card terminal, scale, scanner and printer: the first time one is needed, or from the
+     Devices button. When a device that was set up is no longer there, the register says so and offers setup again. */
+  const profileOf = c => DB && c?.kind === 'profile' && has(DB.payment_devices.profiles, c.profile_id) ? DB.payment_devices.profiles[c.profile_id] : null;
+  const LINES = [[9600, 7, 'even'], [9600, 8, 'none'], [9600, 7, 'odd'], [4800, 7, 'even'], [4800, 8, 'none'], [2400, 7, 'even'], [2400, 8, 'none'], [19200, 8, 'none'], [1200, 7, 'even']];
+  const lineId = c => `${c.baud}-${c.bits}-${c.parity}`;
+  const lineSelect = (id, cfg, dflt) => h('select', { id }, LINES.map(([baud, bits, parity]) => { const v = `${baud}-${bits}-${parity}`; return h('option', { value: v, selected: v === (cfg.baud ? lineId(cfg) : dflt), text: `${baud} baud, ${bits} data bits, ${parity} parity` }); }));
+  const lineOf = sel => { const [baud, bits, parity] = sel.value.split('-'); return { baud: Number(baud), bits: Number(bits), parity }; };
+  const options = (pairs, value) => pairs.map(([v, text]) => h('option', { value: v, text, selected: v === value }));
+  const field = (label, control, hint) => h('div', { class: 'field' }, h('label', { for: control.id, text: label }), control, hint ? h('p', { class: 'fine', text: hint }) : null);
+  /* Where a card sale is pushed for this register's card setup. */
+  function cardTarget(c) {
+    if (c.kind === 'sim') return { label: 'Practice device', provider: 'Practice simulator', endpoint: 'sim://approve' };
+    const p = profileOf(c);
+    if (p) return { label: p.label, provider: p.provider_name || p.label, endpoint: c.endpoint || p.endpoint_address, serial: p.connection_type === 'SERIAL_COM', port: c.port, profile_id: c.profile_id };
+    if (c.kind === 'serial') return { label: c.label || 'Card device', provider: c.label || 'Card device', endpoint: `@${c.baud}`, serial: true, port: c.port, line: c };
+    return { label: c.label || 'Card device', provider: c.label || 'Card device', endpoint: c.endpoint };
+  }
+
+  const Hw = (() => {
+    const miss = { card: false, scale: false, scanner: false };
+    let scanLink = null;
+
+    const cardWords = () => {
+      const c = DEV.card;
+      if (!c) return 'Asked for at the first card payment';
+      if (c.kind === 'manual') return 'Not connected: the amount is keyed on the terminal';
+      if (c.kind === 'sim') return 'Practice device: no card is charged';
+      if (c.kind === 'profile' && !profileOf(c)) return 'The device saved by the owner was removed';
+      const t = cardTarget(c);
+      return t.serial ? `${t.label} on a ${Devices.portWords(c.port) || 'serial port'}` : `${t.label} at ${t.endpoint}`;
+    };
+    const scaleWords = () => {
+      const s = DEV.scale;
+      if (!s) return 'Asked for at the first weighed item';
+      if (s.kind === 'manual') return 'Not connected: the weight is typed in';
+      if (s.kind === 'hid') return s.hid?.name || 'USB scale';
+      return `${Devices.PROTOCOLS[s.protocol].name} ${s.kind === 'net' ? `at ${s.url}` : `on a ${Devices.portWords(s.port)}`}`;
+    };
+    const scannerWords = () => DEV.scanner?.kind === 'serial' ? `On a ${Devices.portWords(DEV.scanner.port)}` : 'Types like a keyboard';
+    const printerWords = () => `${paperWidth()} mm paper${DB && !DB.settings.printing_enabled ? '. The owner has switched printing off' : ''}`;
+    const cardHint = () => manualCard || DEV.card?.kind === 'manual' ? 'Amount keyed on the terminal' : !DEV.card ? 'Asks for the terminal on first use'
+      : DEV.card.kind === 'profile' && !profileOf(DEV.card) ? 'Terminal needs setting up again' : `Pushes to ${cardTarget(DEV.card).label}`;
+
+    function paint() {
+      const n = Object.values(miss).filter(Boolean).length;
+      $('devBtn').classList.toggle('warn', n > 0);
+      $('devBtn').title = n ? 'A device set up on this register is not connected' : 'This register’s devices';
+    }
+    /* Looks for each device this register was set up with. */
+    async function check() {
+      const s = DEV.scale, n = DEV.scanner, c = DEV.card;
+      miss.scale = !!s && ((s.kind === 'hid' && !(await Devices.findHid(s.hid))) || (s.kind === 'serial' && !(await Devices.findPort(s.port))));
+      miss.scanner = n?.kind === 'serial' && !(await Devices.findPort(n.port));
+      const serialCard = c?.kind === 'serial' || profileOf(c)?.connection_type === 'SERIAL_COM';
+      miss.card = !!c && !!DB && ((c.kind === 'profile' && !profileOf(c)) || (serialCard && !!c.port && !(await Devices.findPort(c.port))));
+      paint();
+      return miss;
+    }
+
+    /* Starts reading the scale. Throws an error marked .missing when the scale that was set up is not there. */
+    async function watch(cfg, onReading, onLost) {
+      let handle = null;
+      if (cfg.kind === 'hid') handle = await Devices.findHid(cfg.hid);
+      else if (cfg.kind === 'serial') handle = await Devices.findPort(cfg.port);
+      if (cfg.kind !== 'net' && !handle) throw Object.assign(new Error('The scale is not connected.'), { missing: true });
+      return Devices.watchScale(cfg, handle, r => onReading({ ...r, unit: r.unit || cfg.unit || null }), onLost);
+    }
+
+    /* ----- card terminal ----- */
+    async function setupCard(lead) {
+      const cur = DEV.card || {}, profiles = DB ? Object.entries(DB.payment_devices.profiles) : [];
+      const start = cur.kind === 'profile' ? (profileOf(cur) ? 'p:' + cur.profile_id : 'manual') : cur.kind || 'manual';
+      let mark = cur.port || null;
+      const name = h('input', { id: 'cdName', maxlength: '40', autocomplete: 'off', value: cur.label || '', placeholder: 'Front counter terminal' });
+      const addr = h('input', { id: 'cdAddr', autocomplete: 'off', spellcheck: 'false', value: cur.endpoint || '', placeholder: '192.168.1.45:8080/v2/sale' });
+      const line = lineSelect('cdLine', cur, '9600-8-none'), portSay = h('span', { class: 'fine' });
+      const sayPort = async () => { portSay.textContent = !Devices.serialOk() ? 'This browser cannot use serial ports. Use Chrome or Edge.' : !mark ? 'No port chosen yet.' : (await Devices.findPort(mark)) ? `Using a ${Devices.portWords(mark)}.` : `The ${Devices.portWords(mark)} chosen before is not connected.`; };
+      const portBtn = h('button', { type: 'button', class: 'btn small', text: 'Choose the port', onclick: async () => { try { mark = await Devices.portMark(await navigator.serial.requestPort()); } catch { /* picker closed */ } sayPort(); } });
+      const fName = field('Name for this terminal', name, 'Shown to the cashier and printed on receipts.');
+      const fAddr = field('Address', addr, 'Host, port and path. Start with ws:// for a WebSocket address.');
+      const fPort = h('div', { class: 'field' }, h('div', { class: 'quick' }, portBtn, portSay)), fLine = field('Line settings', line);
+      const kindNow = () => $('formBody').querySelector('input[name=cardKind]:checked')?.value || start;
+      const parts = k => { const prof = k.startsWith('p:') ? DB.payment_devices.profiles[k.slice(2)] : null; return { prof, serial: k === 'serial' || prof?.connection_type === 'SERIAL_COM' }; };
+      function sync() {
+        const k = kindNow(), { prof, serial } = parts(k);
+        fName.hidden = !(k === 'lan' || k === 'serial');
+        fAddr.hidden = !(k === 'lan' || (prof && !serial));
+        if (prof && !serial) addr.value = cur.kind === 'profile' && cur.profile_id === k.slice(2) && cur.endpoint ? cur.endpoint : prof.endpoint_address;
+        fPort.hidden = !serial; fLine.hidden = k !== 'serial';
+        if (serial) sayPort();
+      }
+      const choice = (value, title, note) => h('label', { class: 'map-opt' }, h('input', { type: 'radio', name: 'cardKind', value, checked: value === start, onchange: sync }), h('strong', { text: title }), h('span', { text: note }));
+      const done = await formDialog({
+        title: 'Card terminal for this register', ok: 'Use this', onShow: sync,
+        body: [lead || null,
+          h('div', { class: 'map-list', role: 'radiogroup', 'aria-label': 'How the card terminal is connected' },
+            choice('manual', 'Not connected to this register', 'Works with every terminal: Clover, Square, Verifone, Ingenico, PAX, Dejavoo and the rest. The register shows the amount and you key it on the terminal.'),
+            choice('lan', 'On the network', 'A terminal or bridge program that accepts this register’s sale message at an address.'),
+            choice('serial', 'On a serial or USB-COM port', 'A device or bridge program that accepts the sale message as one line of text.'),
+            profiles.map(([id, p]) => choice('p:' + id, p.label, `Saved by the owner: ${p.provider_name || 'card device'}, ${p.connection_type === 'SERIAL_COM' ? 'serial port' : 'network'}, ${p.endpoint_address || 'no address'}`)),
+            choice('sim', 'Practice device', 'For training. No card is charged, and receipts say so. Needs the owner PIN.')),
+          fName, fAddr, fPort, fLine],
+        onOk: async () => {
+          const k = kindNow(), { prof, serial } = parts(k), address = addr.value.trim();
+          if ((k === 'lan' || (prof && !serial)) && !address) return 'Type the address of the terminal or bridge.';
+          if (serial && !(mark && await Devices.findPort(mark))) return 'Choose the port the device is plugged into.';
+          if (k === 'sim' && DB?.settings.pin_hash && !(await askPin('Enter the owner PIN to use the practice device', DB.settings.pin_hash))) return 'The practice device needs the owner PIN.';
+          DEV.card = k === 'manual' ? { kind: 'manual' } : k === 'sim' ? { kind: 'sim' }
+            : prof ? { kind: 'profile', profile_id: k.slice(2), endpoint: serial || address === prof.endpoint_address ? '' : address, port: serial ? mark : null }
+              : k === 'serial' ? { kind: 'serial', label: name.value.trim(), port: mark, ...lineOf(line) } : { kind: 'lan', label: name.value.trim(), endpoint: address };
+          saveDev();
+        }
+      });
+      await check(); render();
+      return done === 'ok';
+    }
+
+    /* ----- scale ----- */
+    async function setupScale(lead) {
+      const cur = DEV.scale || {};
+      let hidM = cur.kind === 'hid' ? cur.hid : null, portM = cur.kind === 'serial' ? cur.port : null, stop = null, token = 0, finding = null;
+      const live = h('p', { class: 'scale-test', role: 'status' }), say = h('span', { class: 'fine' });
+      const halt = async () => { token++; const s = stop; stop = null; live.textContent = ''; await finding?.catch(() => {}); if (s) await s().catch(() => {}); };
+      const kind = h('select', { id: 'scKind', onchange: () => { halt(); sync(); } }, options([['hid', 'USB scale (plugs in, no settings)'], ['serial', 'Serial, USB-COM or Bluetooth serial port'],
+        ['net', 'Network address (through a bridge program)'], ['manual', 'Not connected: I type the weight shown on the scale']], cur.kind || (Devices.hidOk() ? 'hid' : 'manual')));
+      const proto = h('select', { id: 'scProto', onchange: () => { const d = Devices.PROTOCOLS[proto.value].serial; line.value = `${d.baud}-${d.bits}-${d.parity}`; halt(); } }, options(Object.entries(Devices.PROTOCOLS).map(([k, p]) => [k, p.name]), cur.protocol || 'nci'));
+      const line = lineSelect('scLine', cur, '9600-7-even');
+      const unit = h('select', { id: 'scUnit' }, options([['lb', 'pounds (lb)'], ['kg', 'kilograms (kg)']], cur.unit || 'lb'));
+      const url = h('input', { id: 'scUrl', autocomplete: 'off', spellcheck: 'false', value: cur.url || '', placeholder: '192.168.1.50:8080/weight' });
+      const config = () => kind.value === 'manual' ? { kind: 'manual' } : kind.value === 'hid' ? { kind: 'hid', hid: hidM }
+        : kind.value === 'net' ? { kind: 'net', url: url.value.trim(), protocol: proto.value, unit: unit.value } : { kind: 'serial', port: portM, protocol: proto.value, unit: unit.value, ...lineOf(line) };
+      async function test() {
+        await halt();
+        const mine = token, cfg = config(); let seen = false;
+        if ((cfg.kind === 'hid' && !hidM) || (cfg.kind === 'serial' && !portM)) return void (live.textContent = 'Choose the scale first.');
+        if (cfg.kind === 'net' && !cfg.url) return void (live.textContent = 'Type the address first.');
+        live.textContent = 'Listening to the scale…';
+        try {
+          const s = await watch(cfg, r => {
+            if (mine !== token) return;
+            seen = true;
+            live.textContent = r.weight === null ? `The scale answers. It has no weight to give right now: ${r.note}.`
+              : `The scale reads ${r.weight} ${r.unit}${r.stable === false ? ', still settling' : ''}. This must match the scale’s own display.`;
+          }, () => { if (mine === token) live.textContent = 'The scale stopped answering.'; });
+          if (mine !== token) return void s();
+          stop = s;
+          setTimeout(() => { if (mine === token && !seen) live.textContent = 'Nothing is coming from the scale with these settings.'; }, 3000);
+        } catch (e) { if (mine === token) live.textContent = e.missing ? 'That scale is not connected.' : cfg.kind === 'net' ? 'Nothing answers at that address.' : `The scale could not be opened: ${e.message}`; }
+      }
+      async function find() {
+        await halt();
+        const mine = token, port = await Devices.findPort(portM);
+        if (!port) return void (live.textContent = 'Choose the port first.');
+        live.textContent = 'Looking for the scale…';
+        finding = Devices.detectSerial(port, text => { if (mine === token) live.textContent = text; }, () => mine !== token);
+        const got = await finding.catch(() => null); finding = null;
+        if (mine !== token) return;
+        if (!got) return void (live.textContent = 'No scale answered on this port. Check the cable and that the scale is switched on. If its manual names a protocol, pick it below and press Test.');
+        proto.value = got.protocol; line.value = lineId(got);
+        test();
+      }
+      async function choose() {
+        await halt();
+        try {
+          if (kind.value === 'hid') { const [dev] = await navigator.hid.requestDevice({ filters: [{ usagePage: 0x8d }] }); if (!dev) return; hidM = Devices.hidMark(dev); sync(); test(); }
+          else { portM = await Devices.portMark(await navigator.serial.requestPort()); sync(); find(); }
+        } catch { /* picker closed */ }
+      }
+      const pick = h('button', { type: 'button', class: 'btn small', onclick: choose }), findBtn = h('button', { type: 'button', class: 'btn small', text: 'Find my scale', onclick: find });
+      const testBtn = h('button', { type: 'button', class: 'btn small', text: 'Test', onclick: test });
+      const fPick = h('div', { class: 'field' }, h('div', { class: 'quick' }, pick, findBtn, testBtn, say));
+      const fUrl = field('Address', url, 'A bridge program that gives the scale’s output as a web address. Start with ws:// for a WebSocket.');
+      const fProto = field('How the scale talks', proto, 'Find my scale sets this for you.'), fLine = field('Line settings', line), fUnit = field('The scale shows', unit, 'Used when the scale does not send its unit.');
+      async function sync() {
+        const k = kind.value, can = k === 'hid' ? Devices.hidOk() : Devices.serialOk();
+        fPick.hidden = k === 'manual'; pick.hidden = findBtn.hidden = k === 'net' || k === 'manual'; findBtn.hidden ||= k !== 'serial';
+        fUrl.hidden = k !== 'net'; fProto.hidden = fUnit.hidden = !(k === 'serial' || k === 'net'); fLine.hidden = k !== 'serial';
+        pick.textContent = k === 'hid' ? 'Choose the scale' : 'Choose the port'; pick.disabled = !can;
+        say.textContent = k === 'net' ? '' : !can ? 'This browser cannot do this. Use Chrome or Edge on a computer.'
+          : k === 'hid' ? (!hidM ? 'No scale chosen yet.' : (await Devices.findHid(hidM)) ? `${hidM.name}, connected.` : `${hidM.name} is not connected.`)
+            : !portM ? 'No port chosen yet.' : (await Devices.findPort(portM)) ? `Using a ${Devices.portWords(portM)}.` : `The ${Devices.portWords(portM)} chosen before is not connected.`;
+      }
+      const done = await formDialog({
+        title: 'Scale for this register', ok: 'Use this', onShow: sync,
+        body: [lead || null, field('How the scale is connected', kind), fPick, fUrl, fProto, fLine, fUnit, live],
+        onOk: async () => {
+          const cfg = config();
+          if (cfg.kind === 'hid' && !hidM) return 'Choose the scale first.';
+          if (cfg.kind === 'serial' && !portM) return 'Choose the port the scale is plugged into.';
+          if (cfg.kind === 'net' && !cfg.url) return 'Type the address.';
+          await halt();
+          DEV.scale = cfg; saveDev();
+        }
+      });
+      await halt(); await check();
+      return done === 'ok';
+    }
+
+    /* ----- scanner ----- */
+    async function stopScanner() { const l = scanLink; scanLink = null; if (l) await l.close().catch(() => {}); }
+    async function startScanner() {
+      await stopScanner();
+      const c = DEV.scanner;
+      if (c?.kind !== 'serial') return;
+      const port = await Devices.findPort(c.port);
+      if (!port) return;
+      let buf = '', idle = null;
+      const flush = () => { clearTimeout(idle); const code = buf.replace(/[^\x20-\x7e]/g, '').trim(); buf = ''; if (code) serialScan(code); };
+      try {
+        scanLink = await Devices.openSerial(port, c, bytes => {
+          for (const b of bytes) { const ch = b & 0x7f; if (ch === 13 || ch === 10 || ch === 3) flush(); else if (ch >= 32) buf += String.fromCharCode(ch); }
+          clearTimeout(idle); if (buf) idle = setTimeout(flush, 150);                      // scanners that send no end mark
+        }, () => { scanLink = null; toast('The scanner on the serial port was disconnected.', 'bad'); check(); });
+      } catch { scanLink = null; toast('The scanner’s serial port could not be opened. Another program may be using it.', 'bad'); }
+    }
+    async function setupScanner() {
+      const cur = DEV.scanner || { kind: 'keyboard' };
+      let mark = cur.port || null, link = null, shown = '';
+      const live = h('p', { class: 'scale-test', role: 'status' }), say = h('span', { class: 'fine' });
+      const hush = async () => { const l = link; link = null; live.textContent = ''; if (l) await l.close().catch(() => {}); };
+      const kind = h('select', { id: 'snKind', onchange: () => { hush(); sync(); } }, options([['keyboard', 'It types like a keyboard (nothing to set up)'], ['serial', 'Serial or USB-COM port']], cur.kind));
+      const line = lineSelect('snLine', cur, '9600-8-none');
+      async function listen() {
+        await hush();
+        const port = await Devices.findPort(mark);
+        if (!port) return void (live.textContent = 'Choose the port first.');
+        try {
+          shown = '';
+          link = await Devices.openSerial(port, lineOf(line), bytes => { shown = (shown + bytes.map(b => { const ch = b & 0x7f; return ch >= 32 && ch < 127 ? String.fromCharCode(ch) : ' '; }).join('')).slice(-48); live.textContent = `Received: ${shown.trim()}`; });
+          live.textContent = 'Scan any barcode now. Its number should appear here.';
+        } catch (e) { live.textContent = `The port could not be opened: ${e.message}`; }
+      }
+      const pick = h('button', { type: 'button', class: 'btn small', text: 'Choose the port', onclick: async () => { try { mark = await Devices.portMark(await navigator.serial.requestPort()); } catch { return; } await sync(); listen(); } });
+      const testBtn = h('button', { type: 'button', class: 'btn small', text: 'Test', onclick: listen });
+      const fPick = h('div', { class: 'field' }, h('div', { class: 'quick' }, pick, testBtn, say)), fLine = field('Line settings', line, 'Most scanners use 9600 baud, 8 data bits, no parity.');
+      async function sync() {
+        const serial = kind.value === 'serial';
+        fPick.hidden = fLine.hidden = !serial; pick.disabled = !Devices.serialOk();
+        say.textContent = !Devices.serialOk() ? 'This browser cannot use serial ports. Use Chrome or Edge.' : !mark ? 'No port chosen yet.' : (await Devices.findPort(mark)) ? `Using a ${Devices.portWords(mark)}.` : `The ${Devices.portWords(mark)} chosen before is not connected.`;
+      }
+      await stopScanner();
+      const done = await formDialog({
+        title: 'Barcode scanner for this register', ok: 'Use this', onShow: sync,
+        body: ['Hand-held, in-counter and Bluetooth scanners nearly all work as a keyboard, and need no setup. Choose the serial option only for a scanner wired to a serial or USB-COM port.', field('How the scanner is connected', kind), fPick, fLine, live],
+        onOk: async () => {
+          if (kind.value === 'serial' && !mark) return 'Choose the port the scanner is plugged into.';
+          await hush();
+          DEV.scanner = kind.value === 'serial' ? { kind: 'serial', port: mark, ...lineOf(line) } : { kind: 'keyboard' }; saveDev();
+        }
+      });
+      await hush(); await startScanner(); await check();
+      return done === 'ok';
+    }
+
+    /* ----- receipt printer ----- */
+    const sampleReceipt = () => receiptNode({ id: 'TEST', ts: new Date().toISOString(), type: 'sale', subtotal: 3.48, discount: 0, tax: 0.08, total: 3.56, saved: 0.5,
+      items: [{ name: 'Test item', qty: 2, price: 1.5, unit_price: 1.25, total: 2.5 }, { name: 'Weighed test item', qty: 1, price: 0.79, unit_price: 0.79, total: 0.98, weight: 1.235, weight_unit: 'lb' }],
+      payment: { method: 'cash', tendered: 5, change: 1.44 } });
+    async function setupPrinter() {
+      const paper = h('select', { id: 'prPaper' }, options([['80', '80 mm roll (the usual receipt printer)'], ['58', '58 mm roll (narrow printer)']], String(paperWidth())));
+      const tryIt = h('button', { type: 'button', class: 'btn', text: 'Print a test receipt', onclick: () => { try { printNode(sampleReceipt(), 'Test receipt', Number(paper.value)); } catch { toast('The test receipt could not be sent to the printer.', 'bad'); } } });
+      const done = await formDialog({
+        title: 'Receipt printer for this register', ok: 'Save',
+        body: ['Receipts go to this computer’s default printer, on a page exactly as wide as the roll and as long as the receipt. Make the receipt printer the default printer in the computer’s settings.', field('Paper', paper), tryIt],
+        onOk: () => { DEV.printer = { paper: Number(paper.value) }; saveDev(); }
+      });
+      return done === 'ok';
+    }
+
+    /* ----- the Devices button ----- */
+    async function open() {
+      if (busy || modalOpen()) return;
+      const rows = [['Card terminal', cardWords, 'card', setupCard, () => !!DEV.card], ['Scale', scaleWords, 'scale', setupScale, () => !!DEV.scale],
+        ['Barcode scanner', scannerWords, 'scanner', setupScanner, () => true], ['Receipt printer', printerWords, '', setupPrinter, () => true]];
+      const draw = async () => {
+        await check();
+        $('devList').replaceChildren(...rows.map(([name, words, key, setup, isSet]) => h('li', {},
+          h('div', {}, h('strong', { text: name }), miss[key] ? h('span', { class: 'pill', text: 'Not connected' }) : null, h('span', { class: 'words', text: words() })),
+          h('button', { type: 'button', class: 'btn small', text: miss[key] ? 'Set up again' : isSet() ? 'Change' : 'Set up', onclick: async () => { await setup(); draw(); } }))));
+      };
+      await draw();
+      $('devDlg').showModal();
+    }
+    function start() {
+      const again = async () => { const before = { ...miss }; await check(); if (DEV.scanner?.kind === 'serial' && !scanLink && !miss.scanner) startScanner(); return before; };
+      if (Devices.serialOk()) for (const ev of ['connect', 'disconnect']) navigator.serial.addEventListener(ev, again);
+      if (Devices.hidOk()) for (const ev of ['connect', 'disconnect']) navigator.hid.addEventListener(ev, again);
+      check().then(m => {
+        const gone = [m.card && 'card terminal', m.scale && 'scale', m.scanner && 'scanner'].filter(Boolean);
+        if (gone.length) toast(`The ${gone.join(' and the ')} set up on this register ${gone.length > 1 ? 'are' : 'is'} not connected. Press Devices to set ${gone.length > 1 ? 'them' : 'it'} up again.`, 'bad');
+      });
+      startScanner();
+    }
+    return { start, open, check, watch, cardHint, setupCard, setupScale, miss };
+  })();
+
+  /* ---------- weighing an item ---------- */
+  const rateOf = it => { const sale = toCents(it.sale_price), price = toCents(it.price); return sale > 0 && sale < price ? sale : price; };
+  /* Shows the live weight and resolves with the weight in the item's unit, 'setup' to change the scale, or null. */
+  function weighDialog(it) {
+    const dlg = $('weighDlg'), form = dlg.querySelector('form'), input = $('weighIn'), unit = it.by_weight, scale = DEV.scale;
+    let stop = null, open = true, now = null, lastSeen = null, repeats = 0, heard = false, out = null, first = 0, last = 0, keys = 0;
+    const state = text => { $('weighState').textContent = text; };
+    $('weighTitle').textContent = `Weigh ${it.name}`;
+    $('weighRate').textContent = `${fmt(rateOf(it))} per ${unit}`;
+    $('weighNow').textContent = scale.kind === 'manual' ? '' : `– ${unit}`;
+    $('weighLabel').textContent = scale.kind === 'manual' ? `Weight shown on the scale (${unit})` : `Or type the weight (${unit})`;
+    input.value = ''; $('weighErr').textContent = '';
+    const take = weight => { out = weight; dlg.close('ok'); };
+    const onReading = r => {
+      if (!open) return;
+      heard = true; now = null;
+      if (r.weight === null) { $('weighNow').textContent = `– ${unit}`; return state(r.note === 'moving' ? 'Settling…' : r.note === 'below zero' ? 'The scale reads below zero. Empty it and press its zero button.' : r.note === 'over capacity' ? 'Too heavy for this scale.' : `The scale has no weight to give: ${r.note}.`); }
+      if (!r.unit) return state('This scale does not say whether it weighs in lb or kg. Set that in Scale setup.');
+      const w = Core.convertWeight(r.weight, r.unit, unit);
+      $('weighNow').textContent = `${w.toFixed(3)} ${unit}`;
+      repeats = w === lastSeen ? repeats + 1 : 0; lastSeen = w;
+      const steady = r.stable === true || (r.stable === null && repeats >= 3);            // no steady flag: the same weight four times running
+      if (w <= 0) return state('Put the item on the scale.');
+      state(`${steady ? '' : 'Settling… '}${fmt(Math.round(rateOf(it) * w))} at the shelf price`);
+      if (steady) { now = w; if (!input.value) take(w); }
+    };
+    return new Promise(res => {
+      const submit = e => {
+        e.preventDefault();
+        if (!input.value.trim()) return now ? take(now) : void ($('weighErr').textContent = 'Wait for a steady weight, or type the weight.');
+        /* A barcode scanned into this box arrives far faster than anyone types; it must not become a weight. */
+        if (keys >= 4 && (last - first) / (keys - 1) < 30) { input.value = ''; keys = first = 0; return void ($('weighErr').textContent = 'That was a scan, not a typed weight.'); }
+        const w = Core.round3(Number(input.value));
+        if (!(w > 0) || w > 999) return void ($('weighErr').textContent = 'Type a weight above zero.');
+        take(w);
+      };
+      const typing = e => { if (e.key.length === 1) { last = performance.now(); first ||= last; keys++; } };
+      const setup = () => { out = 'setup'; dlg.close('setup'); };
+      form.addEventListener('submit', submit); input.addEventListener('keydown', typing); $('weighSetup').addEventListener('click', setup);
+      dlg.addEventListener('close', async () => {
+        open = false;
+        form.removeEventListener('submit', submit); input.removeEventListener('keydown', typing); $('weighSetup').removeEventListener('click', setup);
+        if (stop) await stop().catch(() => {});
+        res(out);
+      }, { once: true });
+      dlg.showModal(); input.focus();
+      if (scale.kind === 'manual') return state('Read the weight off the scale and type it.');
+      state('Reading the scale…');
+      Hw.watch(scale, onReading, () => { if (open) { now = null; $('weighNow').textContent = `– ${unit}`; state('The scale stopped answering. Check its cable, or type the weight.'); Hw.check(); } })
+        .then(s => { if (open) stop = s; else s().catch(() => {}); setTimeout(() => { if (open && !heard) state('The scale is not answering. Check that it is switched on, press Scale setup, or type the weight.'); }, 2500); })
+        .catch(e => { if (!open) return; Hw.check(); state(e.missing ? 'The scale set up on this register is not connected. Plug it in, press Scale setup to set it up again, or type the weight.' : scale.kind === 'net' ? 'Nothing answers at the scale\u2019s address. Press Scale setup, or type the weight.' : `The scale could not be opened (${e.message}). Press Scale setup, or type the weight.`); });
+    });
+  }
+  async function weighItem(code, it) {
+    for (;;) {
+      if (!DEV.scale && !(await Hw.setupScale('This is the first weighed item on this register. Tell it which scale it has.'))) return;     // first use on this register
+      const w = await weighDialog(it);
+      if (w === 'setup') { await Hw.setupScale(); continue; }
+      if (!w) return;
+      addToCart(`${code}\tw${Math.round(w * 1000)}`, it); render();
+      return;
+    }
+  }
 
   /* ---------- Wi-Fi link to the host ----------
      Invariant: this register's data = the last copy it took from the host (or a file) + the effects of every sale in
@@ -1366,7 +2147,7 @@ const Core = (() => {
       lamp.hidden = !linked();
       if (!linked()) return;
       lamp.classList.toggle('away', !live);
-      lamp.textContent = live ? `Linked to ${link.host.name}` : `Host out of reach${n ? `, ${n} sale${n === 1 ? '' : 's'} waiting` : ''}`;
+      lamp.textContent = live ? `Linked to ${link.host.name}` : `Host out of reach${n ? `, ${n} waiting to send` : ''}`;
     }
     function hangUp() {                                    // drop the current connection without scheduling a retry
       const c = conn; conn = null; onAnswer = null; clearTimeout(retry);
@@ -1496,6 +2277,7 @@ const Core = (() => {
     } catch (e) { toast(`Local storage is unavailable: ${e.message}`, 'bad'); }
     Store.onChange(async () => { try { DB = await Store.load(); if (DB) pruneCart(); render(); } catch { /* keep the last good copy */ } });
     render(); refocus();
+    Hw.start();
     Net.start();
     registerOffline().then(ok => { $('offlineLamp').hidden = !ok; });
   }
