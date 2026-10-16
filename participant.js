@@ -1,8 +1,8 @@
 // Participant clicker PWA: PIN -> name -> team -> live 1–5 button surface.
-import { h, registerSW, vibrate } from '../shared/ui.js';
-import { icon } from '../shared/icons.js';
-import { T, PHASE, OPTION_COLORS, uid, cleanName, isLocalMode } from '../shared/protocol.js';
-import { ClientLink } from '../shared/transport.js';
+import { h, registerSW, vibrate } from './ui.js';
+import { icon } from './icons.js';
+import { T, PHASE, OPTION_COLORS, uid, cleanName, isLocalMode } from './protocol.js';
+import { ClientLink } from './transport.js';
 
 registerSW('./sw.js');
 

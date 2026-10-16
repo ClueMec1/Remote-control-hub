@@ -6,10 +6,17 @@ The interface is in English. Questions and answers written by the host appear ri
 
 ## Publish on GitHub Pages
 
-1. Create a new repository (for example `clicker-join`) and upload **the contents of this folder** to the root of the repository. `index.html` must sit at the top level.
-2. In the repository, go to **Settings → Pages**. Under "Build and deployment", choose **Deploy from a branch**, branch **main**, folder **/ (root)**, then **Save**.
-3. After a minute the site is live at `https://YOUR-USERNAME.github.io/clicker-join/`.
-4. Copy that address into the Host app's dashboard, under **Join app address**.
+All files sit side by side in one folder (there are no subfolders), so nothing gets lost when you upload.
+
+1. Unzip `clicker-join.zip` on your computer.
+2. On GitHub, open your repository (for example `clicker-join`) → **Add file → Upload files**.
+3. Open the unzipped folder, select **every file** (Ctrl+A on Windows, Cmd+A on Mac), and drag them all into the GitHub upload box. You should see about 14 files listed. Then press **Commit changes**.
+4. Go to **Settings → Pages**. Under "Build and deployment", choose **Deploy from a branch**, branch **main**, folder **/ (root)**, then **Save**.
+5. Wait a minute, then open `https://YOUR-USERNAME.github.io/clicker-join/`.
+
+If a file is missing, the page shows which files to upload instead of staying blank.
+
+6. Copy that address into the Host app's dashboard, under **Join app address**.
 
 The QR code on the host screen links to `<this address>?pin=1234`, so players land straight in the right game. Players can also open the address and type the 4-digit code themselves.
 
@@ -23,4 +30,4 @@ The QR code on the host screen links to `<this address>?pin=1234`, so players la
 
 ## Good to know
 - **Where answers go:** answers go straight from each phone to the host's computer over WebRTC. No data is stored on a server.
-- **Compatibility:** the Host and Join apps share `shared/protocol.js`. If you change one copy, update both.
+- **Compatibility:** the Host and Join apps share `protocol.js`. If you change one copy, update both.

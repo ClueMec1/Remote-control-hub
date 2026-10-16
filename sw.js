@@ -1,17 +1,17 @@
 // Service worker — participant PWA. App shell precache + runtime caching.
-const VERSION = 'clicker-participant-v1.1.0';
+const VERSION = 'clicker-participant-v1.2.0';
 const SHELL = [
   "./",
+  "base.css",
+  "icon-192.png",
+  "icons.js",
   "index.html",
   "manifest.json",
-  "css/participant.css",
-  "js/participant.js",
-  "icons/icon-192.png",
-  "shared/base.css",
-  "shared/protocol.js",
-  "shared/transport.js",
-  "shared/ui.js",
-  "shared/icons.js"
+  "participant.css",
+  "participant.js",
+  "protocol.js",
+  "transport.js",
+  "ui.js"
 ];
 
 self.addEventListener('install', (e) => {
