@@ -1,5 +1,5 @@
-// Service worker — participant PWA. App shell precache + runtime caching.
-const VERSION = 'clicker-participant-v1.2.0';
+// Service worker — participant PWA. App shell precache; network-first for app files, cache-first for CDN libraries.
+const VERSION = 'clicker-participant-v1.5.0';
 const SHELL = [
   "./",
   "base.css",
@@ -34,11 +34,17 @@ self.addEventListener('fetch', (e) => {
   if (url.hostname.endsWith('peerjs.com')) return;
 
   if (url.origin === location.origin) {
-    // stale-while-revalidate; query strings (?pin=1234) map onto the same shell file
+    // network-first: always run the newest published version when online; cached copy when offline
     e.respondWith(caches.open(VERSION).then(async (cache) => {
-      const cached = await cache.match(req, { ignoreSearch: true });
-      const net = fetch(req).then((res) => { if (res.ok) cache.put(req.url.split('?')[0], res.clone()); return res; }).catch(() => cached);
-      return cached || net;
+      try {
+        const res = await fetch(req, { cache: 'no-cache' });
+        if (res.ok) cache.put(req.url.split('?')[0], res.clone());
+        return res;
+      } catch (err) {
+        const hit = await cache.match(req, { ignoreSearch: true });
+        if (hit) return hit;
+        throw err;
+      }
     }));
     return;
   }

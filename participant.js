@@ -1,7 +1,7 @@
 // Participant clicker PWA: PIN -> name -> team -> live 1–5 button surface.
 import { h, registerSW, vibrate } from './ui.js';
 import { icon } from './icons.js';
-import { T, PHASE, OPTION_COLORS, uid, cleanName, isLocalMode } from './protocol.js';
+import { T, PHASE, OPTION_COLORS, RESULT_PHASES, uid, cleanName, isLocalMode } from './protocol.js';
 import { ClientLink } from './transport.js';
 
 registerSW('./sw.js');
@@ -36,6 +36,7 @@ let rxAt = 0;
 let pending = null;         // optimistic choice {slideId, choice}
 let view = '';
 let draftName = store.name || '';
+let vibratedFor = null;
 
 const app = document.getElementById('app');
 const dot = h('span.dot.connecting');
@@ -87,6 +88,7 @@ function onMsg(m) {
     case T.INFO:
       info = m;
       if (m.joined && m.me) { store.joined = true; store.name = m.me.name; store.team = m.me.team; save(); }
+      else if (m.locked) { store.joined = false; store.nameDone = false; save(); }   // joining is closed
       else if (store.joined && store.name) join(store.name, store.team);       // host lost us (new session) — rejoin silently
       break;
     case T.STATE:
@@ -152,6 +154,7 @@ function render() {
   if (link.status === 'nohost' && !info) return show('nohost', viewNoHost);
   if (!info) return show('connecting', viewConnecting);
   if (!store.joined) {
+    if (info.locked) return show('locked', viewLocked);
     if (!store.nameDone) return show('name', viewName);
     if (info.teams.length) return show('team', viewTeam);
   }
@@ -196,6 +199,15 @@ function viewNoHost() {
     h('h2', 'Game not found'),
     h('p', `No game is running with code ${store.pin} right now. Still trying…`),
     h('button.btn', { onclick: () => { leave(); } }, 'Enter a different code'),
+  );
+}
+
+function viewLocked() {
+  return h('div.wait',
+    h('div.big', '🔒'),
+    h('h2', 'Joining is closed'),
+    h('p', 'The game has already started. Ask the host to let late players join — this screen updates by itself.'),
+    h('button.btn', { onclick: () => link?.reconnectNow() }, 'Try again'),
   );
 }
 
@@ -246,6 +258,14 @@ function showPlay() {
   if (view === 'play:' + key) return undefined;
   view = 'play:' + key;
 
+  if (s.phase === PHASE.INTRO) {
+    body.replaceChildren(wait('👀', 'Look at the screen', 'The game is about to begin…'));
+    return undefined;
+  }
+  if (s.phase === PHASE.END) {
+    body.replaceChildren(wait('🎉', 'Thanks for playing!', 'The results are on the screen'));
+    return undefined;
+  }
   if (s.phase === PHASE.LOBBY || !sl) {
     body.replaceChildren(wait(h('div.pulse'), 'You’re in!', 'Your name is on the screen. Waiting for the first question…'));
     return undefined;
@@ -259,7 +279,7 @@ function showPlay() {
     return undefined;
   }
   const chosen = s.myChoice ?? pending?.choice ?? null;
-  if (s.phase === PHASE.REVEAL) {
+  if (RESULT_PHASES.includes(s.phase)) {
     if (sl.type === 'quiz' && s.correct != null) {
       const ok = s.myChoice === s.correct;
       body.replaceChildren(wait(
@@ -267,7 +287,7 @@ function showPlay() {
         s.myChoice == null ? 'You didn’t answer in time' : ok ? 'Correct!' : 'Not this time',
         answerLine('Correct answer:', s.correct, sl.options[s.correct]),
       ));
-      if (ok) vibrate([30, 60, 30, 60, 80]);
+      if (ok && vibratedFor !== sl.id) { vibratedFor = sl.id; vibrate([30, 60, 30, 60, 80]); }
     } else {
       body.replaceChildren(wait('📊', 'The results are on the screen', chosen != null ? answerLine('You chose:', chosen, sl.options[chosen]) : ''));
     }
